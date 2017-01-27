@@ -1,0 +1,96 @@
+@args (String title, RockerBody body)
+
+@raw(docType())
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share links to Podcast episodes, share them and play in your browser">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- TODO: self-host -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.purple-green.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <script type="application/javascript" src="/js/app.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>@title</title>
+</head>
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            <h3>@title</h3>
+        </div>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+            <a href="#overview" class="mdl-layout__tab is-active">Home</a>
+            <a href="#features" class="mdl-layout__tab">About</a>
+            <a href="#features" class="mdl-layout__tab">FAQ</a>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+                <i class="material-icons" role="presentation">add</i>
+                <span class="visuallyhidden">Add</span>
+            </button>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="mdl-layout__tab-panel is-active" id="overview">
+
+            @body
+
+        </div>
+
+        <div class="mdl-layout__tab-panel" id="features">
+            <section class="section--center mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-cell mdl-cell--12-col">
+                    A brief overview of features
+
+                    <ul class="toc">
+                        <h4>Contents</h4>
+                        <a href="#lorem1">Foo's bars</a>
+                        <a href="#lorem2">Biz's Bas</a>
+                    </ul>
+
+                    <h5 id="lorem1">About Foo's</h5>
+                    Then some more stuff about foo's bars
+                    <ul>
+                        <li>Fun fact1</li>
+                        <li>Fun fact2</li>
+                        <li>Fun fact3</li>
+                    </ul>
+                    <p>
+                        Additional facts
+                    </p>
+                    <p id="lorem2">
+                        Biz that baz
+                    </p>
+                    <p>
+                        Quality assured.
+                    </p>
+                    <p>
+                        Very accurate.
+                    </p>
+                </div>
+            </section>
+        </div>
+        <footer class="mdl-mega-footer">
+            <div class="mdl-mega-footer--bottom-section">
+                <div class="mdl-logo">
+                    More Information
+                </div>
+                <ul class="mdl-mega-footer--link-list">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy and Terms</a></li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+</div>
+</body>
+</html>
+
+
