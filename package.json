@@ -1,0 +1,33 @@
+{
+  "name": "sharepodcasts",
+  "version": "1.0.0",
+  "description": "A Website to Share Podcasts Episodes Easily ",
+  "main": "NA",
+  "dependencies": {
+    "webpack": "^1.14.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victory/SharePodcasts.git"
+  },
+  "keywords": [
+    "podcast",
+    "spark",
+    "rocker",
+    "webpack"
+  ],
+  "author": "Victory",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Victory/SharePodcasts/issues"
+  },
+  "homepage": "https://github.com/Victory/SharePodcasts#readme"
+}

@@ -62,6 +62,11 @@ buildscript {
     }
 }
 
+task compileWebpack(type:Exec) {
+    inputs.files "src/main/javascript"
+    commandLine "bash", "webpack.sh"
+}
+
 dependencies {
 
     compile group: "com.sparkjava",

@@ -14,9 +14,13 @@ import static spark.Spark.staticFiles;
  */
 public class SharePodcasts {
     public static void main(String[] args) {
-        RockerRuntime.getInstance().setReloading(true);
 
-        staticFiles.location("/public");
+        // DEBUGING
+        RockerRuntime.getInstance().setReloading(true);
+        String publicDir = System.getProperty("user.dir") + "/src/main/resources/public";
+        staticFiles.externalLocation(publicDir);
+
+        //staticFiles.location("/public");
 
         List<Controller> controllerList = new ArrayList<>();
         controllerList.add(new HomeController());
