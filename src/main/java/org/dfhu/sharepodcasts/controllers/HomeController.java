@@ -9,7 +9,7 @@ public class HomeController extends BaseController implements Controller {
 
     @Override
     public void setupRoutes() {
-        doGet(RouteManager.getHomeRoute(), (req, res) -> {
+        doGet(RouteManager.home(), (req, res) -> {
             HomeViewModel vm = new HomeViewModel();
             Home template = Home.template("Share a Podcast", vm);
             return new RockerTemplateModel(template);

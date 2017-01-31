@@ -1,10 +1,14 @@
 @args ()
 
 <!-- Simple Textfield -->
-<form action="">
+<form action="@attr(route().suggest())" method="POST">
     <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="sample1">
+        <input vic-suggest name="q" class="mdl-textfield__input" type="text" id="sample1">
         <label class="mdl-textfield__label" for="sample1">Search for podcast...</label>
     </div>
+    <button type="button"
+            class="block mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        Share
+    </button>
 </form>
 

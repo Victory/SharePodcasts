@@ -16,4 +16,4 @@ if [ ! -e ${WEBPACK_PATH} ]; then
     echo "Warning: webpack does not exist, make sure to run `npm install` first"
 fi
 
-node ./node_modules/webpack/bin/webpack.js --optimize-minimize
+node ./node_modules/webpack/bin/webpack.js #--optimize-minimize

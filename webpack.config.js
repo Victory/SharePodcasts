@@ -13,8 +13,10 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
-            }
-        ]
+            },
+
+        ],
     },
+
     devtool: "source-map"
 };

@@ -1,7 +1,20 @@
 package org.dfhu.sharepodcasts;
 
 public class RouteManager {
-    public static String getHomeRoute() {
+    private static RouteManager INSTANCE = new RouteManager();
+
+    /** Use getInstance */
+    private RouteManager() {}
+
+    public static RouteManager getInstance() {
+        return INSTANCE;
+    }
+
+    public static String home() {
         return "/";
+    }
+
+    public static String suggest() {
+        return "/suggest";
     }
 }

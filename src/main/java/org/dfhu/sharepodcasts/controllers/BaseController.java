@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.controllers;
 
 import org.dfhu.sharepodcasts.templateengine.RockerTemplateEngine;
+import spark.Request;
 import spark.Spark;
 import spark.TemplateViewRoute;
 
@@ -13,5 +14,4 @@ abstract class BaseController {
     public static void doGet(String path, TemplateViewRoute templateViewRoute) {
         Spark.get(path, templateViewRoute, RockerTemplateEngine.getInstance());
     }
-
 }
