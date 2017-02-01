@@ -191,6 +191,24 @@ html, body {
   z-index: 99;
 }
 
-block {
+.block {
   display: block;
+}
+
+.float-right {
+  float:right;
+}
+
+.hidden {
+  display: none;
+}
+
+.suggest-results {
+  margin: 0;
+  padding-left: 0px;
+}
+
+.suggest-results > li {
+  list-style: none;
+
 }

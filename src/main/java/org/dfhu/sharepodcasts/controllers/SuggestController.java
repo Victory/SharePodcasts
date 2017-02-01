@@ -8,26 +8,30 @@ import java.util.LinkedList;
 
 import static spark.Spark.post;
 
-public class SuggestController extends BaseController implements Controller{
+public class SuggestController extends BaseController implements Controller {
 
     @Override
     public void setupRoutes() {
         post(RouteManager.suggest(), (req, res) -> {
-            req.queryParams("q");
-
-            return jsonStub();
+            String q = req.queryParams("q");
+            return jsonStub(q);
         });
     }
 
-    /** Stub */
-    private String jsonStub() {
+    /**
+     * Stub
+     * @param q
+     */
+    private String jsonStub(String q) {
         Gson gson = new Gson();
 
         Collection<SuggestResponse> stuff = new LinkedList<>();
 
-        stuff.add(new SuggestResponse("A Way with Words", "show"));
-        stuff.add(new SuggestResponse("Giant Pool of Money", "episode"));
-        stuff.add(new SuggestResponse("What we know", "episode"));
+        if (!q.startsWith("n")) {
+            stuff.add(new SuggestResponse("A Way with Words", "show", 1));
+            stuff.add(new SuggestResponse("Giant Pool of Money", "episode", 3));
+            stuff.add(new SuggestResponse("What we know", "episode", 2));
+        }
 
         return gson.toJson(stuff);
     }
@@ -36,11 +40,14 @@ public class SuggestController extends BaseController implements Controller{
         // Name of the episode or show
         private String name;
         // if it is a episode or show
-        private String type;
+        private String mediaType;
+        // rowId
+        private int rowId;
 
-        SuggestResponse(String name, String type) {
+        SuggestResponse(String name, String type, int rowId) {
             this.name = name;
-            this.type = type;
+            this.mediaType = type;
+            this.rowId = rowId;
         }
         public String getName() {
             return name;
@@ -50,12 +57,12 @@ public class SuggestController extends BaseController implements Controller{
             this.name = name;
         }
 
-        public String getType() {
-            return type;
+        public String getMediaType() {
+            return mediaType;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setMediaType(String type) {
+            this.mediaType = type;
         }
     }
 }
