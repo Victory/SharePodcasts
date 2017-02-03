@@ -63,6 +63,29 @@ buildscript {
     }
 }
 
+task concatinateVendor() {
+    def out = new File("src/main/resources/public/js/vendor.js")
+    def jsFiles = [
+            "node_modules/jquery/dist/jquery.js",
+            "node_modules/bootstrap/dist/js/bootstrap.js"
+    ]
+    jsFiles.each {out << new File(it).text + "\n;\n"}
+
+    copy {
+        from "node_modules/bootstrap/dist/fonts"
+        into "src/main/resources/public/fonts"
+        include "*eot"
+        include "*svg"
+        include "*ttf"
+        include "*woff"
+        include "*woff2"
+    }
+     new File("node_modules/bootstrap/dist/fonts").eachFile() { file ->
+         def name = file.name
+         def dashName = file.name.toLower()
+     }
+}
+
 task compileWebpack(type:Exec) {
     inputs.files "src/main/javascript"
     commandLine "bash", "webpack.sh"

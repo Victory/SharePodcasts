@@ -2,6 +2,7 @@ import {getLabelFor, setText, vLog, listen, qs, getVal, ajaxPost, showError, clo
 
 module.exports = {
     suggestKeyup: function () {
+        console.log($("body").html().substr(0, 50));
 
         var input = qs("[vic-suggest]");
         var suggestResults = qs("[vic-suggest-results]");
