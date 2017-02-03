@@ -1,5 +1,14 @@
+const webpack = require('webpack');
 module.exports = {
-    entry: __dirname + "/src/main/javascript/entry.js",
+    entry: {
+        bundel: __dirname + "/src/main/javascript/entry.js",
+        //vendor: __dirname + "/src/main/javascript/vendor/jquery.js",
+    },
+    resolve: {
+        alias: {
+            jquery: __dirname + "/src/main/javascript/vendor/jquery.js",
+        }
+    },
     output: {
         path: __dirname + "/src/main/resources/public/js",
         filename: "bundle.js"
@@ -17,6 +26,12 @@ module.exports = {
 
         ],
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
+    ],
 
     devtool: "source-map"
 };

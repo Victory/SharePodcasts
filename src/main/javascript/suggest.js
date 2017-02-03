@@ -2,6 +2,7 @@ import {getLabelFor, setText, vLog, listen, qs, getVal, ajaxPost, showError, clo
 
 module.exports = {
     suggestKeyup: function () {
+
         var input = qs("[vic-suggest]");
         var suggestResults = qs("[vic-suggest-results]");
         var suggestPrototype = cloneNode(qs("[vic-suggest-results] > .hidden"));
