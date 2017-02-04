@@ -65,6 +65,7 @@ buildscript {
 
 task concatinateVendor() {
     def out = new File("src/main/resources/public/js/vendor.js")
+    out.write ""
     def jsFiles = [
             "node_modules/jquery/dist/jquery.js",
             "node_modules/bootstrap/dist/js/bootstrap.js"
@@ -80,10 +81,10 @@ task concatinateVendor() {
         include "*woff"
         include "*woff2"
     }
-     new File("node_modules/bootstrap/dist/fonts").eachFile() { file ->
-         def name = file.name
-         def dashName = file.name.toLower()
-     }
+//     new File("node_modules/bootstrap/dist/fonts").eachFile() { file ->
+//         def name = file.name
+//         def dashName = file.name.toLower()
+//     }
 }
 
 task compileWebpack(type:Exec) {
