@@ -7,6 +7,7 @@ apply plugin: 'idea'
 apply plugin: "application"
 
 sourceCompatibility = 1.8
+mainClassName = "org.dfhu.SharePodcasts"
 
 
 sourceSets {
@@ -64,13 +65,15 @@ buildscript {
 }
 
 task concatinateVendor() {
-    def out = new File("src/main/resources/public/js/vendor.js")
-    out.write ""
+    def jsOut = new File("src/main/resources/public/js/vendor.js")
+    jsOut.write ""
     def jsFiles = [
             "node_modules/jquery/dist/jquery.js",
-            "node_modules/bootstrap/dist/js/bootstrap.js"
+            "node_modules/bootstrap/dist/js/bootstrap.js",
+            "node_modules/bootstrap-material-design/dist/js/material.js",
+            "node_modules/bootstrap-material-design/dist/js/ripples.js",
     ]
-    jsFiles.each {out << new File(it).text + "\n;\n"}
+    jsFiles.each {jsOut << new File(it).text + "\n;\n"}
 
     copy {
         from "node_modules/bootstrap/dist/fonts"
@@ -81,6 +84,17 @@ task concatinateVendor() {
         include "*woff"
         include "*woff2"
     }
+    
+    def cssOut = new File("src/main/resources/public/css/vendor.css")
+    cssOut.write ""
+    def cssFiles = [
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            "node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css",
+            "node_modules/bootstrap-material-design/dist/css/ripples.css",
+    ]
+    cssFiles.each {cssOut << new File(it).text + "\n"}
+
+
 //     new File("node_modules/bootstrap/dist/fonts").eachFile() { file ->
 //         def name = file.name
 //         def dashName = file.name.toLower()
