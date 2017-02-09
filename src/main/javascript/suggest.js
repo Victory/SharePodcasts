@@ -2,16 +2,61 @@ import {getLabelFor, setText, vLog, listen, qs, getVal, ajaxPost, showError, clo
 
 module.exports = {
     suggestKeyup: function () {
-        console.log($("body").html().substr(0, 50));
+        let $input = $("[vic-suggest]");
+        let $tmp = $("[vic-suggest-prototype]");
+        let $prototype = $tmp.clone();
+        $tmp.remove();
+        let $results = $("[vic-suggest-results]");
 
-        var input = qs("[vic-suggest]");
-        var suggestResults = qs("[vic-suggest-results]");
-        var suggestPrototype = cloneNode(qs("[vic-suggest-results] > .hidden"));
+        $input.on("blur", evt => {
+            $results.addClass("hidden");
+            $results.html('');
+        });
 
-        input.value = "";
+        var xhr;
+        $input.on("input", evt => {
 
+            $results.addClass("hidden");
+            $results.html('');
+
+            let $this = $(evt.target);
+            if (xhr != null) {
+                xhr.abort();
+            }
+
+            xhr = $.ajax({
+                url: "/suggest",
+                method: "POST",
+                data: {q: $this.val()}
+            });
+
+            xhr.fail(evt => {
+                console.error("error", evt);
+            });
+
+            xhr.done(data => {
+
+                $results.removeClass("hidden");
+                vLog("done", data);
+                try {
+                    var suggestions = JSON.parse(data);
+                } catch (e) {
+                    throw e;
+                }
+
+                suggestions.forEach(item => {
+                    let $cur = $prototype.clone();
+                    $cur.find("a").text(item.name);
+                    $results.append($cur);
+                });
+
+            });
+        });
+
+
+        /*
         var vXhr;
-        listen(input, "keyup", evt => {
+        $input.keyup(evt => {
             let val = getVal(evt);
             if (val.length < 3) {
                 addClass(suggestResults, "hidden");
@@ -50,14 +95,14 @@ module.exports = {
 
             }, evt => {
                 vLog(evt);
-            i})
-            .then(r => {
+                i
+            })
+                .then(r => {
 
-            },
-            err => {
-                showError(e);
-            });
-
+                    },
+                    err => {
+                        showError(e);
+                    });
 
 
             vXhr.done(evt => {
@@ -70,5 +115,6 @@ module.exports = {
         listen(input, "focus", evt => {
             setText(getLabelFor(evt), "");
         });
+        */
     },
 };

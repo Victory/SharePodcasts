@@ -1,7 +1,6 @@
 @args ()
 
-<!-- Simple Textfield -->
-<form action="@attr(route().suggest())" method="POST" class="well-form">
+<form action="@attr(route().addFeed())" method="POST" class="well-form">
     <div class="inputs form-title well">
         <h2>Import Feed
             <small>(rss feed)</small>
@@ -14,6 +13,12 @@
                 Use the rss feed url
                 <code>Include http://</code>
             </span>
+        </div>
+
+        <div class="form-group text-right">
+            <a class="btn btn-primary btn-raised ">
+                Add New Feed
+            </a>
         </div>
     </div>
 </form>

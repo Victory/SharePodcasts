@@ -17,4 +17,12 @@ public class RouteManager {
     public static String suggest() {
         return "/suggest";
     }
+
+    public static String addFeed() {
+        return "/add-feed";
+    }
+
+    public static String createShareLink() {
+        return "/create-share-link";
+    }
 }

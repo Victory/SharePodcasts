@@ -1,0 +1,27 @@
+@args ()
+
+<form action="@attr(route().createShareLink())" method="POST" class="well-form">
+    <div class="inputs form-title well">
+        <h2>Share a Podcast Episode
+        </h2>
+
+        <div class="form-group label-floating">
+            <label for="rss-input" class="control-label">Search</label>
+            <input vic-suggest class="form-control" id="rss-input" type="url" />
+            <span class="help-block">
+                Search by episode or show title
+            </span>
+            <ul vic-suggest-results class="search-results hidden">
+                <li vic-suggest-prototype><a>Suggestion one</a></li>
+            </ul>
+
+        </div>
+
+        <div class="form-group text-right">
+            <a class="btn btn-primary btn-raised ">
+                Share Episode
+            </a>
+        </div>
+    </div>
+</form>
+
