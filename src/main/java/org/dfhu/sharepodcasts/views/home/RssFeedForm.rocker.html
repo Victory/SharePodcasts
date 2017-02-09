@@ -1,14 +1,15 @@
 @args ()
 
-<form action="@attr(route().addFeed())" method="POST" class="well-form">
+<form vic-import-feed-form action="@attr(route().addFeed())" method="POST" class="well-form">
     <div class="inputs form-title well">
         <h2>Import A Feed
             <small>(rss feed)</small>
         </h2>
+        <div vic-import-alert-box class="click-pointer"></div>
 
         <div class="form-group label-floating">
             <label for="rss-input" class="control-label">RSS Url</label>
-            <input class="form-control" id="rss-input" type="url" />
+            <input vic-import-feed-input class="form-control" id="rss-input" type="url" />
             <span class="help-block">
                 Use the rss feed url
                 <code>Include http://</code>
@@ -16,7 +17,7 @@
         </div>
 
         <div class="form-group text-right">
-            <a class="btn btn-primary btn-raised ">
+            <a vic-import-feed-button class="btn btn-primary btn-raised">
                 Add New Feed
             </a>
         </div>

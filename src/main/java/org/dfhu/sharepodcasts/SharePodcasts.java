@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts;
 
 import com.fizzed.rocker.runtime.RockerRuntime;
 import org.dfhu.sharepodcasts.controllers.Controller;
+import org.dfhu.sharepodcasts.controllers.FeedController;
 import org.dfhu.sharepodcasts.controllers.HomeController;
 import org.dfhu.sharepodcasts.controllers.SuggestController;
 
@@ -28,6 +29,7 @@ public class SharePodcasts {
         List<Controller> controllerList = new ArrayList<>();
         controllerList.add(new HomeController());
         controllerList.add(new SuggestController());
+        controllerList.add(new FeedController());
 
         SharePodcastsApplication.setupRoutes(controllerList);
     }

@@ -71,3 +71,7 @@
 input.form-control {
     padding-left: 8px;
 }
+
+.click-pointer {
+    cursor: pointer;
+}
