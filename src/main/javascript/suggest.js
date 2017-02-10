@@ -5,13 +5,17 @@ module.exports = {
         let $input = $("[vic-suggest]");
         let $tmp = $("[vic-suggest-prototype]");
         let $prototype = $tmp.clone();
+        let $rowId = $("[name=rowId]");
+
         $tmp.remove();
         let $results = $("[vic-suggest-results]");
 
-        $input.on("blur", evt => {
+        let clearSuggestions = evt => {
             $results.addClass("hidden");
             $results.html('');
-        });
+        };
+
+        $input.on("focus", clearSuggestions);
 
         var xhr;
         $input.on("input", evt => {
@@ -39,9 +43,7 @@ module.exports = {
             });
 
             xhr.done(data => {
-
                 $results.removeClass("hidden");
-                vLog("done", data);
                 try {
                     var suggestions = JSON.parse(data);
                 } catch (e) {
@@ -50,7 +52,16 @@ module.exports = {
 
                 suggestions.forEach(item => {
                     let $cur = $prototype.clone();
-                    $cur.find("a").text(item.name);
+                    let $a = $cur.find("a");
+                    $a.text(item.name);
+                    $a.attr('href', '#' + item.rowId);
+
+                    $cur.click(evt => {
+                        evt.preventDefault();
+                        $rowId.val(item.rowId);
+                        clearSuggestions(evt);
+                        $input.val(item.name);
+                    });
                     $results.append($cur);
                 });
 

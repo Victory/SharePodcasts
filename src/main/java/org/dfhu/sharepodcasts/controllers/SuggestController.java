@@ -38,7 +38,7 @@ public class SuggestController extends BaseController implements Controller {
 
         final Collection<SuggestResponse> results = new LinkedList<>();
         episodes.stream().forEach(e -> {
-            results.add(new SuggestResponse(e.title, "show", e.id));
+            results.add(new SuggestResponse(e.title, "show", e.id.toString()));
         });
 
         return gson.toJson(results);
@@ -50,9 +50,9 @@ public class SuggestController extends BaseController implements Controller {
         // if it is a episode or show
         private String mediaType;
         // rowId
-        private ObjectId rowId;
+        private String rowId;
 
-        SuggestResponse(String name, String type, ObjectId rowId) {
+        SuggestResponse(String name, String type, String rowId) {
             this.name = name;
             this.mediaType = type;
             this.rowId = rowId;
