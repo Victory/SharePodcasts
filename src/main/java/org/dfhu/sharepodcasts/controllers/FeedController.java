@@ -4,7 +4,6 @@ import com.mongodb.DuplicateKeyException;
 import org.dfhu.sharepodcasts.JsoupFeed;
 import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.morphs.DataProvider;
-import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,6 +41,8 @@ public class FeedController extends BaseController implements Controller {
         }
 
         feed.getEpisodes().stream().forEach(episode -> {
+            episode.showId = showMorph.id;
+            episode.showTitle = showMorph.title;
             try {
                 DataProvider.get().save(episode);
             } catch (DuplicateKeyException e) {}
