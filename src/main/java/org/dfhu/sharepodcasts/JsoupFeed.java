@@ -1,7 +1,7 @@
 package org.dfhu.sharepodcasts;
 
 
-import org.dfhu.sharepodcasts.model.Episode;
+import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -29,6 +29,15 @@ public class JsoupFeed {
         return elm.text();
     }
 
+    public String getDescription() {
+        Elements found = doc.select("rss > channel > description");
+        if (found.size() == 0) {
+            return "";
+        }
+        Element elm = found.get(0);
+        return elm.text();
+    }
+
     public String getUrl() {
         return url;
     }
@@ -37,18 +46,19 @@ public class JsoupFeed {
      * Get episode info, the consumer is expected to set the showId before inserting
      * @return - episodes, without the showId
      */
-    public List<Episode> getEpisodes() {
+    public List<EpisodeMorph> getEpisodes() {
         Elements elms = doc.select("rss > channel item");
-        List<Episode> items = new ArrayList<>();
+        final List<EpisodeMorph> items = new ArrayList<>();
 
-        for (Element elm: elms) {
+        elms.forEach(elm -> {
             JsoupFeedItem item = new JsoupFeedItem(elm);
-            Episode episode = new Episode();
+            EpisodeMorph episode = new EpisodeMorph();
             episode.url = item.getUrl();
             episode.title = item.getTitle();
             episode.pubDate = item.getPubDate();
+            episode.description = item.getDescription();
             items.add(episode);
-        }
+        });
 
         return items;
     }

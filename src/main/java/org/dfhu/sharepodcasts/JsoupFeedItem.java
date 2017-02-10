@@ -66,5 +66,14 @@ class JsoupFeedItem {
 
         return date;
     }
+
+    public String getDescription() {
+        Elements description = elm.select("description");
+        if (description.size() < 1) {
+            return "";
+        }
+
+        return description.get(0).text();
+    }
 }
 
