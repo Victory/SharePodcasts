@@ -21,6 +21,8 @@ module.exports = {
         $input.on("input", evt => {
             let $this = $(evt.target);
 
+            $rowId.val("");
+
             $results.addClass("hidden");
             $results.html('');
 
