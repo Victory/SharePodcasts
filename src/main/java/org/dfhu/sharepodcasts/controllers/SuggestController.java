@@ -1,10 +1,15 @@
 package org.dfhu.sharepodcasts.controllers;
 
 import com.google.gson.Gson;
+import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.morphs.DataProvider;
+import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
+import org.mongodb.morphia.query.Query;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import static spark.Spark.post;
 
@@ -25,15 +30,18 @@ public class SuggestController extends BaseController implements Controller {
     private String jsonStub(String q) {
         Gson gson = new Gson();
 
-        Collection<SuggestResponse> stuff = new LinkedList<>();
+        Query<EpisodeMorph> query = DataProvider.get().createQuery(EpisodeMorph.class)
+                .search(q)
+                .order("pubDate");
+        List<EpisodeMorph> episodes = query.asList();
 
-        if (!q.startsWith("n")) {
-            stuff.add(new SuggestResponse("A Way with Words", "show", 1));
-            stuff.add(new SuggestResponse("Giant Pool of Money", "episode", 3));
-            stuff.add(new SuggestResponse("What we know", "episode", 2));
-        }
 
-        return gson.toJson(stuff);
+        final Collection<SuggestResponse> results = new LinkedList<>();
+        episodes.stream().forEach(e -> {
+            results.add(new SuggestResponse(e.title, "show", e.id));
+        });
+
+        return gson.toJson(results);
     }
 
     public static class SuggestResponse {
@@ -42,13 +50,14 @@ public class SuggestController extends BaseController implements Controller {
         // if it is a episode or show
         private String mediaType;
         // rowId
-        private int rowId;
+        private ObjectId rowId;
 
-        SuggestResponse(String name, String type, int rowId) {
+        SuggestResponse(String name, String type, ObjectId rowId) {
             this.name = name;
             this.mediaType = type;
             this.rowId = rowId;
         }
+
         public String getName() {
             return name;
         }
