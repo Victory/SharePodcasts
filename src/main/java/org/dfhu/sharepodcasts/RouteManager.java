@@ -25,4 +25,12 @@ public class RouteManager {
     public static String createShareLink() {
         return "/create-share-link";
     }
+
+    public static String listen() {
+        return "/l/:rowId";
+    }
+
+    public static String listen(String rowId) {
+        return "/l/" + rowId;
+    }
 }

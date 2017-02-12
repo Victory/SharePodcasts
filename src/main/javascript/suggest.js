@@ -2,10 +2,13 @@ import {vLog} from "./vic";
 
 module.exports = {
     suggestKeyup: function () {
+
         let $input = $("[vic-suggest]");
         let $tmp = $("[vic-suggest-prototype]");
         let $prototype = $tmp.clone();
         let $rowId = $("[name=rowId]");
+        let $button = $("[vic-suggest-button]");
+        let $form = $button.parents("form").first();
 
         $tmp.remove();
         let $results = $("[vic-suggest-results]");
@@ -15,6 +18,7 @@ module.exports = {
             $results.html('');
         };
 
+        $input.val('');
         $input.on("focus", clearSuggestions);
 
         var xhr;
@@ -70,5 +74,10 @@ module.exports = {
             });
         }); // on input
 
+
+        $button.click(() => {
+            $form.submit();
+            //console.log(evt.target);
+        }); // on submit
     },
 };

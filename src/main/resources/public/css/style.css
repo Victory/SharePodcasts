@@ -28,6 +28,9 @@
     margin-top: 20px;
 }
 
+.well-margin-top {
+    margin-top: 20px;
+}
 
 .block {
     display: block;
@@ -74,4 +77,8 @@ input.form-control {
 
 .click-pointer {
     cursor: pointer;
+}
+
+.player {
+    width: 150%;
 }

@@ -1,0 +1,14 @@
+@import org.dfhu.sharepodcasts.views.layout.FullPage
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args(ListenViewModel vm)
+
+@FullPage.template("Listen to Episode") -> {
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            @Details.template(vm)
+        </div>
+    </div>
+</div>
+}

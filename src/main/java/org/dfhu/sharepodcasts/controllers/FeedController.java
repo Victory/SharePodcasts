@@ -21,7 +21,7 @@ public class FeedController extends BaseController implements Controller {
         post(RouteManager.addFeed(), (req, res) -> {
             String url = req.queryParams("url");
             parseFeed(url);
-            return "{\"success\": true, \"msg\": \"Feed added try searching for your episode now\"}";
+            return "{\"success\": true, \"msg\": \"Feed added try searching for your listen now\"}";
         });
     }
 

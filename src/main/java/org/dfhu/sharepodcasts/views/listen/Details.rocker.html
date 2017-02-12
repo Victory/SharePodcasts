@@ -1,0 +1,25 @@
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args(ListenViewModel vm)
+
+
+<div class="well well-margin-top">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>@vm.getEpisode().title
+                <small>@vm.getEpisode().showTitle</small>
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8">
+            <audio controls class="player">
+                <source src="@attr(vm.getEpisode().url)" />
+            </audio>
+        </div>
+        <div class="col-xs-12">
+            @vm.getEpisode().description
+        </div>
+    </div>
+</div>

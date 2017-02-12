@@ -1,7 +1,6 @@
 package org.dfhu.sharepodcasts.controllers;
 
 import com.google.gson.Gson;
-import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.morphs.DataProvider;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
@@ -45,9 +44,9 @@ public class SuggestController extends BaseController implements Controller {
     }
 
     public static class SuggestResponse {
-        // Name of the episode or show
+        // Name of the listen or show
         private String name;
-        // if it is a episode or show
+        // if it is a listen or show
         private String mediaType;
         // rowId
         private String rowId;
