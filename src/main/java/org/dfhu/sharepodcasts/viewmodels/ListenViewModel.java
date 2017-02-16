@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.viewmodels;
 
 import com.google.gson.Gson;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
+import org.jsoup.Jsoup;
 
 public class ListenViewModel extends AbstractViewModel implements ViewModel {
 
@@ -23,6 +24,10 @@ public class ListenViewModel extends AbstractViewModel implements ViewModel {
         episodeJson.url = episode.url;
 
         return "window.episode = " + gson.toJson(episodeJson) + ";";
+    }
+
+    public String cleanDescription() {
+       return Jsoup.parse(episode.description).text();
     }
 
     public static final class EpisodeJson {

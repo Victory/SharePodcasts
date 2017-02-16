@@ -15,11 +15,6 @@
     <div class="row">
         <div class="col-xs-12 col-md-9">
             <div vic-audio-bo></div>
-            @*
-            <audio controls>
-                <source src="@attr(vm.getEpisode().url)" />
-            </audio>
-            *@
             <a target="_blank" href="@attr(vm.getEpisode().url)">
                 <div id="audio-error" class="alert alert-info hidden">
                     <h3>
@@ -38,7 +33,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-9">
-            @vm.getEpisode().description
+            @vm.cleanDescription()
         </div>
     </div>
 </div>
