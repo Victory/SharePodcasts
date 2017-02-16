@@ -34,11 +34,5 @@ public class ListenController extends BaseController implements Controller {
             res.redirect(RouteManager.listen(rowId));
             return "";
         });
-
-        // redirect player
-        Spark.get("/p/:key", (req, res) -> {
-            res.redirect("put in url");
-            return "";
-        });
     }
 }

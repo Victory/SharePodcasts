@@ -1,9 +1,9 @@
 @import org.dfhu.sharepodcasts.views.layout.FullPage
 @import org.dfhu.sharepodcasts.viewmodels.*
 
-@args (String title, HomeViewModel vm)
+@args (HomeViewModel vm)
 
-@FullPage.template(title) -> {
+@FullPage.template("Share a Podcast", vm) -> {
 <div class="container">
     <div class="row">
         <div class="col-xs-12">

@@ -11,7 +11,7 @@ public class HomeController extends BaseController implements Controller {
     public void setupRoutes() {
         doGet(RouteManager.home(), (req, res) -> {
             HomeViewModel vm = new HomeViewModel();
-            Home template = Home.template("Share a Podcast", vm);
+            Home template = Home.template(vm);
             return new RockerTemplateModel(template);
         });
     }
