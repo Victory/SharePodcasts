@@ -9,7 +9,7 @@ import org.dfhu.sharepodcasts.viewmodels.ListenViewModel;
 import org.dfhu.sharepodcasts.views.listen.Listen;
 import spark.Spark;
 
-public class EpisodeController extends BaseController implements Controller {
+public class ListenController extends BaseController implements Controller {
     @Override
     public void setupRoutes() {
 
@@ -32,6 +32,12 @@ public class EpisodeController extends BaseController implements Controller {
         Spark.post(RouteManager.createShareLink(), (req, res) -> {
             String rowId = req.queryParams("rowId");
             res.redirect(RouteManager.listen(rowId));
+            return "";
+        });
+
+        // redirect player
+        Spark.get("/p/:key", (req, res) -> {
+            res.redirect("put in url");
             return "";
         });
     }
