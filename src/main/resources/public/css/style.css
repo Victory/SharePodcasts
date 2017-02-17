@@ -82,3 +82,14 @@ input.form-control {
 .player {
     width: 150%;
 }
+
+.info-divider {
+    color: #818181;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.null-link:hover {
+   cursor: default;
+    text-decoration: none;
+}

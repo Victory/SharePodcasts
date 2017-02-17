@@ -34,6 +34,10 @@ public class FeedController extends BaseController implements Controller {
         showMorph.title = feed.getTitle();
         showMorph.url = feed.getUrl();
         showMorph.description = feed.getDescription();
+        showMorph.copyright = feed.getCopyright();
+        showMorph.showUrl = feed.getShowUrl();
+        showMorph.author = feed.getAuthor();
+
 
         try {
             DataProvider.get().save(showMorph);

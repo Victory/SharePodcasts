@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.morphs.DataProvider;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
+import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.templateengine.RockerTemplateModel;
 import org.dfhu.sharepodcasts.viewmodels.ListenViewModel;
 import org.dfhu.sharepodcasts.views.listen.Listen;
@@ -22,7 +23,11 @@ public class ListenController extends BaseController implements Controller {
                     .filter("_id = ", objectId)
                     .get();
 
-            ListenViewModel vm = new ListenViewModel(episode);
+            ShowMorph show = DataProvider.get().createQuery(ShowMorph.class)
+                    .filter("_id = ", episode.showId)
+                    .get();
+
+            ListenViewModel vm = new ListenViewModel(show, episode);
             Listen template = Listen.template(vm);
             return new RockerTemplateModel(template);
         });

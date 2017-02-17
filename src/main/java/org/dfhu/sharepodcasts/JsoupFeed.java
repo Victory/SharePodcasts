@@ -19,27 +19,34 @@ public class JsoupFeed {
         this.doc = doc;
     }
 
-    public String getTitle() {
-        Elements found = doc.select("rss > channel > title");
-        if (found.size() == 0) {
-            return "Unknown Title";
-        }
+    /**
+     * The feed of the url
+     */
+    public String getUrl() {
+        return url;
+    }
 
-        Element elm = found.get(0);
-        return elm.text();
+    public String getTitle() {
+        return fromChannel("title");
     }
 
     public String getDescription() {
-        Elements found = doc.select("rss > channel > description");
-        if (found.size() == 0) {
-            return "";
-        }
-        Element elm = found.get(0);
-        return elm.text();
+        return fromChannel("description");
     }
 
-    public String getUrl() {
-        return url;
+    /**
+     * The Human readable feed
+     */
+    public String getShowUrl() {
+        return fromChannel("link");
+    }
+
+    public String getCopyright() {
+        return fromChannel("copyright");
+    }
+
+    public String getAuthor() {
+        return fromChannel("itunes:author");
     }
 
     /**
@@ -62,4 +69,17 @@ public class JsoupFeed {
 
         return items;
     }
+
+    private String fromChannel(String what) {
+        Elements found = doc.select("rss > channel");
+        if (found.size() < 1) {
+            return "";
+        }
+        found = found.get(0).getElementsByTag(what);
+        if (found.size() < 1) {
+            return "";
+        }
+        return found.get(0).text();
+    }
+
 }

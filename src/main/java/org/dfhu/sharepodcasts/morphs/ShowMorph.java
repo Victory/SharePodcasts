@@ -15,4 +15,7 @@ public class ShowMorph {
     @Indexed(options = @IndexOptions(unique = true))
     public String url;
     public String description;
+    public String showUrl;
+    public String copyright;
+    public String author;
 }
