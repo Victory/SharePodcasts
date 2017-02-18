@@ -50,8 +50,14 @@ module.exports.qs = qs;
 /** getElementById shortcut */
 module.exports.byid = document.getElementById.bind(document);
 
-module.exports.showError = (msg) => {
-    alert(msg);
+/** Generic show error trigger */
+module.exports.showError = (err) => {
+    if (err.msg) {
+        alert(err.msg);
+        return;
+    }
+
+    alert(JSON.stringify(msg));
 };
 
 module.exports.vLog = log;

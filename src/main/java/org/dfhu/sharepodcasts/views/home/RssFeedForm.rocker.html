@@ -9,17 +9,27 @@
 
         <div class="form-group label-floating">
             <label for="rss-input" class="control-label">RSS Url</label>
-            <input vic-import-feed-input class="form-control" id="rss-input" type="url" />
+            <input vic-import-feed-input
+                   vic-btn
+                   vic-btn-disables="new-feed-btn-box"
+                   vic-btn-loads="new-feed-btn-box"
+                   autocomplete="off"
+                   class="form-control"
+                   id="rss-input"
+                   type="url" />
             <span class="help-block">
                 Use the rss feed url
                 <code>Include http://</code>
             </span>
         </div>
 
-        <div class="form-group text-right">
-            <a vic-import-feed-button class="btn btn-primary btn-raised">
-                Add New Feed
-            </a>
+        <div class="form-group text-right" id="new-feed-btn-box">
+            <button type="button" vic-import-feed-btn class="btn btn-primary btn-raised">
+                <span>
+                    Add New Feed
+                </span>
+            </button>
+            <img src="/img/loading.gif" class="loading-gif hidden" />
         </div>
     </div>
 </form>

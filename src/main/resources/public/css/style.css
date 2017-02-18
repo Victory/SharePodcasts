@@ -79,6 +79,17 @@ input.form-control {
     cursor: pointer;
 }
 
+.loading-gif {
+    width: 30px;
+    height: 30px;
+}
+
+a.btn.btn-raised.btn-primary[disabled],
+a.btn.btn-raised.btn-primary:disabled
+{
+    background-color: #F1F1F1;
+}
+
 .player {
     width: 150%;
 }
