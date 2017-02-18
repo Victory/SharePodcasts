@@ -40,15 +40,25 @@
     <div class="row">
         <div class="col-xs-12">
             <a href="@attr(vm.getShow().url)" target="_blank">Subscribe <i class="material-icons">&#xE0E5;</i></a>
-            <span class="info-divider">|</span>
-            <a href="@attr(vm.getShow().url)" target="_blank">Website <i class="material-icons">&#xE157;</i></a>
-            <span class="info-divider">|</span>
-            <a href="#" class="null-link">@vm.getShow().author <i class="material-icons">&#xE91F;</i></a>
+
+            @if (! vm.getShow().showUrl.isEmpty()) {
+                <span class="info-divider">|</span>
+                <a href="@attr(vm.getShow().showUrl)" target="_blank">Website <i class="material-icons">&#xE157;</i></a>
+            }
+            @if (! vm.getShow().author.isEmpty()) {
+                <span class="info-divider">|</span>
+                <a href="#" class="null-link">@vm.getShow().author <i class="material-icons">&#xE91F;</i></a>
+            }
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <a href="#" class="null-link pull-right"><small><i class="material-icons">&#xE90C;</i> @vm.getShow().copyright</small></a>
+            @if (! vm.getShow().copyright.isEmpty()) {
+                <a href="#" class="null-link pull-right"><small><i class="material-icons">&#xE90C;</i> @vm.getShow().copyright</small></a>
+            }
+            @if (vm.getShow().copyright.isEmpty() && ! vm.getShow().author.isEmpty()) {
+                <a href="#" class="null-link pull-right">@vm.getShow().author <i class="material-icons">&#xE91F;</i></a>
+            }
         </div>
     </div>
 </div>
