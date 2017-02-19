@@ -1,4 +1,5 @@
 import {vLog} from "./vic";
+import {disablesEventName, loadsEventName} from "./buttons";
 
 module.exports = {
     suggestKeyup: function () {
@@ -18,11 +19,16 @@ module.exports = {
             $results.html('');
         };
 
+        // reset input
         $input.val('');
+        // disable on load
+        $input.trigger(disablesEventName, "disable");
+        // clear suggestions on focus
         $input.on("focus", clearSuggestions);
 
         var xhr;
         $input.on("input", evt => {
+            $input.trigger(loadsEventName, "show");
             let $this = $(evt.target);
 
             $rowId.val("");
@@ -31,6 +37,7 @@ module.exports = {
             $results.html('');
 
             if ($this.val().length < 3) {
+                $input.trigger(disablesEventName, "disable");
                 return;
             }
 
@@ -45,11 +52,16 @@ module.exports = {
             });
 
             xhr.fail(evt => {
-                console.error("error", evt);
+                if (evt.statusText == "abort") {
+                    return;
+                }
+                $input.trigger(loadsEventName, "hide");
             });
 
             xhr.done(data => {
                 $results.removeClass("hidden");
+                $input.trigger(loadsEventName, "hide");
+
                 try {
                     var suggestions = JSON.parse(data);
                 } catch (e) {
@@ -59,14 +71,20 @@ module.exports = {
                 suggestions.forEach(item => {
                     let $cur = $prototype.clone();
                     let $a = $cur.find("a");
-                    $a.text(item.name);
-                    $a.attr('href', '#' + item.rowId);
+                    $a.attr('href', '/l/' + item.rowId);
+
+                    let $episode = $a.find("[vic-episode-title]");
+                    $episode.text(item.name);
+                    let $show = $a.find("[vic-show-title]");
+                    $show.text(item.showTitle);
 
                     $cur.click(evt => {
                         evt.preventDefault();
                         $rowId.val(item.rowId);
                         clearSuggestions(evt);
                         $input.val(item.name);
+
+                        $input.trigger(disablesEventName, "enable");
                     });
                     $results.append($cur);
                 });

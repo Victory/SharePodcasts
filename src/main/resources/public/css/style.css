@@ -58,17 +58,33 @@
 
 .search-results > li {
     list-style: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #DFDFDF;
 }
 
 .search-results > li > a {
     color: black;
+    width: 100%;
+    display: inline-block;
+    margin:0px;
+    padding: 4px;
+    font-size: 1.2em;
+}
+
+.search-results > li > a > small {
+    font-size: .8em;
+    color: #6F6F6F;
 }
 
 .search-results > li > a:hover {
     text-decoration: none;
     color: #009587;
+    background-color: #F9F9F9;
+}
+
+#search-loading-box > img {
+    margin-top: 30px;
 }
 
 input.form-control {

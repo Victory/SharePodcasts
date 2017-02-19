@@ -27,6 +27,12 @@ public class SuggestController extends BaseController implements Controller {
      * @param q
      */
     private String jsonStub(String q) {
+        // DEBUG
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Gson gson = new Gson();
 
         Query<EpisodeMorph> query = DataProvider.get().createQuery(EpisodeMorph.class)
@@ -37,7 +43,7 @@ public class SuggestController extends BaseController implements Controller {
 
         final Collection<SuggestResponse> results = new LinkedList<>();
         episodes.stream().forEach(e -> {
-            results.add(new SuggestResponse(e.title, "show", e.id.toString()));
+            results.add(new SuggestResponse(e.title, e.showTitle, "show", e.id.toString()));
         });
 
         return gson.toJson(results);
@@ -45,32 +51,20 @@ public class SuggestController extends BaseController implements Controller {
 
     public static class SuggestResponse {
         // Name of the listen or show
-        private String name;
+        private final String name;
+        // show Title
+        private final String showTitle;
         // if it is a listen or show
-        private String mediaType;
+        private final String mediaType;
         // rowId
-        private String rowId;
+        private final String rowId;
 
-        SuggestResponse(String name, String type, String rowId) {
+
+        SuggestResponse(String name, String showTitle, String type, String rowId) {
             this.name = name;
+            this.showTitle = showTitle;
             this.mediaType = type;
             this.rowId = rowId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getMediaType() {
-            return mediaType;
-        }
-
-        public void setMediaType(String type) {
-            this.mediaType = type;
         }
     }
 }
