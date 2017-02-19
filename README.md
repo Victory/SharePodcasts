@@ -2,7 +2,7 @@
 
 An online tool to easily shared podcast episodes.
 
-This is currently a work in progress see [todos](#todos)
+This is currently a work in progress see [todos](#Todos)
 
 # Building
 First run npm upgrade to  install the webpack tools
@@ -18,7 +18,7 @@ Javascript is compiled with webpack.
     ./gradlew -t compileWebpack
 
 
-#### Todos {#todos}
+#### Todos
 
 In no particular order
 
