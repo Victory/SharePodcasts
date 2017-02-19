@@ -18,7 +18,7 @@ Javascript is compiled with webpack.
     ./gradlew -t compileWebpack
 
 
-#### Todos {#todos}
+#### Todos
 
 In no particular order
 
