@@ -17,7 +17,7 @@ public class DataProvider {
         try {
             morphia.mapPackage("org.dfhu.sharepodcasts.morphs");
         } catch (Throwable t) {
-            throw new RuntimeException("Could not find packages");
+            throw new RuntimeException("Could not find packages: " + t.getMessage());
         }
 
         String mongohostname = System.getProperty("mongohostname");

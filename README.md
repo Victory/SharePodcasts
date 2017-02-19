@@ -23,11 +23,12 @@ Javascript is compiled with webpack.
 In no particular order
 
  - Build the feed updater thread pool and executor
- - Privacy Policy and Terms of Service
+ - Terms of Service
  - Add browse feeds and episodes pages
  - Add a field to episodes collection to search text and index on that
  - Add text explaining the site on the homepage
  - Web Analytics
  - Top lists
-
-
+ - Add a field to shows to store originating ip (i.e. who put in the ip)
+ - Add collection for seeing how often people add already existing shows
+ - Contact form

@@ -33,4 +33,8 @@ public class RouteManager {
     public static String listen(String rowId) {
         return "/l/" + rowId;
     }
+
+    public static String privacyPolicy() {
+        return "/legal/privacy-policy";
+    }
 }

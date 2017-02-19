@@ -15,7 +15,6 @@ import static spark.Spark.staticFiles;
  */
 public class SharePodcasts {
     public static void main(String[] args) {
-
         try {
             System.getProperties().load(new FileInputStream("config.properties"));
         } catch (IOException e) {
@@ -40,6 +39,7 @@ public class SharePodcasts {
         controllerList.add(new SuggestController());
         controllerList.add(new FeedController());
         controllerList.add(new ListenController());
+        controllerList.add(new LegalController());
 
         SharePodcastsApplication.setupRoutes(controllerList);
     }
