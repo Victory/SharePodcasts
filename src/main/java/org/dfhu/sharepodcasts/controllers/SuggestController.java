@@ -27,12 +27,6 @@ public class SuggestController extends BaseController implements Controller {
      * @param q
      */
     private String jsonStub(String q) {
-        // DEBUG
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Gson gson = new Gson();
 
         Query<EpisodeMorph> query = DataProvider.get().createQuery(EpisodeMorph.class)
