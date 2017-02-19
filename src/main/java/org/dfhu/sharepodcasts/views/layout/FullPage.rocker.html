@@ -38,24 +38,25 @@
 
 @body
 
-<div class="nav navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="/">Home<div class="ripple-container"></div></a>
-            <a class="navbar-brand" href="@attr(route().privacyPolicy())">Privacy Policy<div class="ripple-container"></div></a>
+<footer>
+    <div class="nav navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Home<div class="ripple-container"></div></a>
+                <a class="navbar-brand" href="@attr(route().privacyPolicy())">Privacy Policy<div class="ripple-container"></div></a>
+            </div>
         </div>
     </div>
-</div>
+</footer>
+
 <script type="application/javascript">
     $.material.init();
 </script>
 <script type="application/javascript" src="/js/bundle.js"></script>
+<img id="one-by-one" />
+<script>
+    document.getElementById("one-by-one").src = "/onebyone";
+</script>
 
 </body>
 </html>

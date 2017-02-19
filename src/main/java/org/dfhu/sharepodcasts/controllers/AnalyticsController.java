@@ -37,6 +37,9 @@ public class AnalyticsController extends BaseController implements Controller {
         Spark.get("/onebyone", (req, res) -> {
             res.header("Content-type", "image/png");
             res.header("Content-Length", "" + img.length);
+            res.header("Cache-control", "no-cache, no-store, must-revalidate");
+            res.header("Pragma", "no-cache");
+            res.header("Expires", "0");
 
             RequestLogAnalytics log = new RequestLogAnalytics();
             log.ip = req.ip();

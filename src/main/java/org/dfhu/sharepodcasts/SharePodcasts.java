@@ -39,6 +39,7 @@ public class SharePodcasts {
         controllerList.add(new SuggestController());
         controllerList.add(new FeedController());
         controllerList.add(new ListenController());
+        controllerList.add(new AnalyticsController());
         controllerList.add(new LegalController());
 
         SharePodcastsApplication.setupRoutes(controllerList);
