@@ -2,7 +2,7 @@
 
 An online tool to easily shared podcast episodes.
 
-This is currently a work in progress see [todos](#Todos)
+This is currently a work in progress see [todos](#todos)
 
 # Building
 First run npm upgrade to  install the webpack tools
