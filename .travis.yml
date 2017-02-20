@@ -12,6 +12,7 @@ install:
 
 script:
   - cd ../../SharePodcasts && pwd
+  - npm upgrade
   - ./gradlew rockerCompile test
 
 before_cache:
