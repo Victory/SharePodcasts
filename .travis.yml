@@ -3,6 +3,11 @@ language: java
 jdk:
   - oraclejdk8
 
+before_install:
+  - nvm install 7.5.0
+  - npm --version
+  - npm upgrade
+
 install:
   - cd .. && pwd && ls
   - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
@@ -12,9 +17,6 @@ install:
 
 script:
   - cd ../../SharePodcasts && pwd
-  - nvm install 7.5.0
-  - npm --version
-  - npm upgrade
   - ./gradlew rockerCompile test
 
 before_cache:
