@@ -17,6 +17,7 @@ Javascript is compiled with webpack.
 
     ./gradlew -t compileWebpack
 
+[![Build Status](https://travis-ci.org/Victory/SharePodcasts.svg?branch=master)](https://travis-ci.org/Victory/SharePodcasts)
 
 #### Todos
 
