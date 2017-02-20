@@ -4,14 +4,14 @@ jdk:
   - oraclejdk8
 
 install:
+  - cd .. && pwd && ls
   - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
   - cd rocker/rocker-gradle-plugin
-  - ../../gradlew build
-  - ../../gradlew uploadArchives
+  - ../../SharePodcasts/gradlew build
+  - ../../SharePodcasts/gradlew uploadArchives
 
 script:
-  - cd ../../
-  - pwd
+  - cd ../../SharePodcasts && pwd
   - ./gradlew rockerCompile test
 
 before_cache:
