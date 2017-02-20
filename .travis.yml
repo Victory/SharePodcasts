@@ -1,5 +1,8 @@
 language: java
 
+jdk:
+  - oraclejdk8
+
 install:
   - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
   - cd rocker/rocker-gradle-plugin
