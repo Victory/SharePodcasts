@@ -6,11 +6,11 @@ jdk:
 install:
   - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
   - cd rocker/rocker-gradle-plugin
-  - gradlew build
-  - gradlew uploadArchives
+  - ./gradlew build
+  - ./gradlew uploadArchives
 
 script:
-  - gradlew rockerCompile test
+  - ./gradlew rockerCompile test
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

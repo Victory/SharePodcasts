@@ -9,7 +9,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
 
@@ -19,11 +19,6 @@ hs_err_pid*
 # intellij stuff
 .idea
 
-# gradle stuff
-.gradle
-gradle
-gradlew
-gradlew.bat
 
 # node/webpack stuff
 /node_modules/
