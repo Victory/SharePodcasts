@@ -2,12 +2,17 @@ package org.dfhu.sharepodcasts;
 
 import com.fizzed.rocker.runtime.RockerRuntime;
 import org.dfhu.sharepodcasts.controllers.*;
+import org.dfhu.sharepodcasts.morphs.DataProvider;
+import org.dfhu.sharepodcasts.morphs.finders.EpisodeFinder;
+import org.dfhu.sharepodcasts.morphs.finders.ShowFinder;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static spark.Spark.exception;
+import static spark.Spark.halt;
 import static spark.Spark.staticFiles;
 
 /**
@@ -35,12 +40,17 @@ public class SharePodcasts {
         }
 
         List<Controller> controllerList = new ArrayList<>();
-        controllerList.add(new HomeController());
-        controllerList.add(new SuggestController());
-        controllerList.add(new FeedController());
-        controllerList.add(new ListenController());
+
+        ShowFinder showFinder = new ShowFinder(DataProvider.get());
+        EpisodeFinder episodeFinder = new EpisodeFinder(DataProvider.get());
+
         controllerList.add(new AnalyticsController());
+        controllerList.add(new CreateShareLinkController());
+        controllerList.add(new FeedController());
+        controllerList.add(new HomeController());
         controllerList.add(new LegalController());
+        controllerList.add(new ListenController(showFinder, episodeFinder));
+        controllerList.add(new SuggestController());
 
         SharePodcastsApplication.setupRoutes(controllerList);
     }

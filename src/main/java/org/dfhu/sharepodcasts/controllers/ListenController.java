@@ -1,43 +1,43 @@
 package org.dfhu.sharepodcasts.controllers;
 
-import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.RouteManager;
-import org.dfhu.sharepodcasts.morphs.DataProvider;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
+import org.dfhu.sharepodcasts.morphs.finders.EpisodeFinder;
+import org.dfhu.sharepodcasts.morphs.finders.ShowFinder;
 import org.dfhu.sharepodcasts.templateengine.RockerTemplateModel;
 import org.dfhu.sharepodcasts.viewmodels.ListenViewModel;
 import org.dfhu.sharepodcasts.views.listen.Listen;
-import spark.Spark;
+import spark.Request;
+
+import java.util.Optional;
+
 
 public class ListenController extends BaseController implements Controller {
+
+    private final ShowFinder showFinder;
+    private final EpisodeFinder episodeFinder;
+
+    public ListenController(ShowFinder showFinder, EpisodeFinder episodeFinder) {
+        this.showFinder = showFinder;
+        this.episodeFinder = episodeFinder;
+    }
+
     @Override
     public void setupRoutes() {
-
         // Play episode
-        doGet(RouteManager.listen(), (req, res) -> {
+        doGet(RouteManager.listen(),
+                (req, res) -> new RockerTemplateModel(listenTemplate(req)));
+    }
 
-            ObjectId objectId = new ObjectId(req.params(":rowId"));
+    Listen listenTemplate(Request req) {
+        String id = req.params(":rowId");
 
-            EpisodeMorph episode = DataProvider.get().createQuery(EpisodeMorph.class)
-                    .filter("_id = ", objectId)
-                    .get();
+        Optional<EpisodeMorph> episode = episodeFinder.byId(id);
+        if (!episode.isPresent()) haltNotFound();
 
-            ShowMorph show = DataProvider.get().createQuery(ShowMorph.class)
-                    .filter("_id = ", episode.showId)
-                    .get();
-
-            ListenViewModel vm = new ListenViewModel(show, episode);
-            Listen template = Listen.template(vm);
-            return new RockerTemplateModel(template);
-        });
-
-        // Create Share Link
-        // TODO: just redirects for now should be able to customize
-        Spark.post(RouteManager.createShareLink(), (req, res) -> {
-            String rowId = req.queryParams("rowId");
-            res.redirect(RouteManager.listen(rowId));
-            return "";
-        });
+        Optional<ShowMorph> show = showFinder.byId(episode.get().showId);
+        ListenViewModel vm = new ListenViewModel(show.get(), episode.get());
+        return Listen.template(vm);
     }
 }
