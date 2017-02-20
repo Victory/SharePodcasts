@@ -5,14 +5,25 @@ An online tool to easily shared podcast episodes.
 This is currently a work in progress see [todos](#todos)
 
 # Building [![Build Status](https://travis-ci.org/Victory/SharePodcasts.svg?branch=master)](https://travis-ci.org/Victory/SharePodcasts)
-First run npm upgrade to  install the webpack tools
 
+### npm
+First run npm upgrade to install the webpack and other js/css depenencies (Here using nvm to get the correct version of npm)
+
+    nvm install 7.5.0
     npm upgrade
+    
+### Rocker Gradle Plugin
+You must have the Rocker Gradle Plugin which is not yet in maven central, so has to be built from source
 
-Its highly recommended to use `nvm` to get version 6.
-
-You must have the Rocker Gradle Plugin
-
+    # cd to same directory where cloned this (SharePodcast) repo. 
+    #   `rocker` and `SharePodcasts` should be sibilings in file structure
+    
+    git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
+    cd rocker/rocker-gradle-plugin
+    ../../SharePodcasts/gradlew build
+    ../../SharePodcasts/gradlew uploadArchives
+    
+### Compiling javascript
 Javascript is compiled with webpack.
 
     ./gradlew -t compileWebpack
