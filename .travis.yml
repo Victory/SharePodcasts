@@ -12,6 +12,8 @@ install:
 
 script:
   - cd ../../SharePodcasts && pwd
+  - nvm install 7.5.0
+  - npm --version
   - npm upgrade
   - ./gradlew rockerCompile test
 
