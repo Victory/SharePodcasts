@@ -13,10 +13,15 @@ mainClassName = "org.dfhu.sharepodcasts.SharePodcasts"
 sourceSets {
     main {
         java {
-            srcDir('src')
+            srcDir('src/main')
             srcDir(project.buildDir.toString() + '/generated/source/apt/main')
             srcDir(project.buildDir.toString() + "/classes/main")
         }
+    }
+    test {
+       java {
+         srcDir('src/test')
+       }
     }
 }
 
@@ -65,7 +70,12 @@ buildscript {
 }
 
 task concatinateVendor() {
-    def jsOut = new File("src/main/resources/public/js/vendor.js")
+    def jsDir = new File("src/main/resources/public/js");
+    if (!jsDir.exists()) {
+       jsDir.mkdirs();
+    }
+
+    def jsOut = new File(jsDir, "vendor.js")
     jsOut.write ""
     def jsFiles = [
             "node_modules/jquery/dist/jquery.js",
@@ -109,6 +119,17 @@ task compileWebpack(type:Exec) {
 task compileWebpackOptimized(type:Exec) {
     inputs.files "src/main/javascript"
     commandLine "bash", "webpack.sh", "--optimize-minimize"
+}
+
+test {
+    include 'org/dfhu/**'
+    testLogging {
+        events "passed", "skipped", "failed" 
+    }
+    beforeTest { descriptor ->
+    	logger.lifecycle("Running test: " + descriptor)
+    }
+    dependsOn 'cleanTest'
 }
 
 dependencies {
