@@ -22,19 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.when;
 
-public class ListenControllerTest {
-
-    private static SparkTestUtil sparkTestUtil;
-
-    @BeforeClass
-    public static void initSpark() {
-        sparkTestUtil = new SparkTestUtil(4567);
-    }
-
-    @AfterClass
-    public static void stopSpark() {
-        Spark.stop();
-    }
+public class ListenControllerTest extends StartSparkControllerTest {
 
     @Test(expected = HaltException.class)
     public void testBadIdGives404() {
