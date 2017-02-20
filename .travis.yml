@@ -10,6 +10,7 @@ install:
   - ../../gradlew uploadArchives
 
 script:
+  - pwd
   - ./gradlew rockerCompile test
 
 before_cache:
