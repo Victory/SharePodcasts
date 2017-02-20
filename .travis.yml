@@ -1,5 +1,13 @@
 language: java
 
+install:
+  - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
+  - cd rocker/rocker-gradle-plugin
+  - gradle build
+  - gradle uploadArchives
+
+script:
+  - gradle rockerCompile test
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
