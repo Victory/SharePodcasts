@@ -72,8 +72,6 @@ public class ListenControllerTest {
         Listen listen = c.listenTemplate(req);
         assertNotNull(listen);
         assertThat(listen, instanceOf(Listen.class));
-
-
     }
 
     @Test
@@ -133,7 +131,6 @@ public class ListenControllerTest {
 
         Optional<ShowMorph> show = Optional.of(showMorph);
         when(showFinder.byId(showId)).thenReturn(show);
-
 
         return new ListenController(showFinder, episodeFinder);
     }
