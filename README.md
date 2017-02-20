@@ -4,7 +4,7 @@ An online tool to easily shared podcast episodes.
 
 This is currently a work in progress see [todos](#todos)
 
-# Building
+# Building [![Build Status](https://travis-ci.org/Victory/SharePodcasts.svg?branch=master)](https://travis-ci.org/Victory/SharePodcasts)
 First run npm upgrade to  install the webpack tools
 
     npm upgrade
@@ -16,8 +16,6 @@ You must have the Rocker Gradle Plugin
 Javascript is compiled with webpack.
 
     ./gradlew -t compileWebpack
-
-[![Build Status](https://travis-ci.org/Victory/SharePodcasts.svg?branch=master)](https://travis-ci.org/Victory/SharePodcasts)
 
 #### Todos
 
