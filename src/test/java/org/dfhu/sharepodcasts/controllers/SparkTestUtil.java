@@ -1,3 +1,10 @@
+/**
+ * This file is derived from
+ * https://github.com/perwendel/spark/blob/34494e6151c8d18fad1b08b4f81e2c6d621b5d80/src/test/java/spark/util/SparkTestUtil.java
+ * Which was released under Apache 2.0
+ * https://github.com/perwendel/spark/blob/master/LICENSE
+ * I have made minor modifications (namely removing ssl support).
+ */
 package org.dfhu.sharepodcasts.controllers;
 
 import java.io.FileInputStream;
