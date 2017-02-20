@@ -10,7 +10,7 @@ install:
   - ../../gradlew uploadArchives
 
 script:
-  - cd $HOME/SharePodcasts
+  - cd ../../
   - pwd
   - ./gradlew rockerCompile test
 
