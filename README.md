@@ -43,3 +43,5 @@ In no particular order
  - Add collection for seeing how often people add already existing shows
  - Contact form
  - More informative 404 pages
+ - implement @attr()
+ - Add skip step button to create-share-link page

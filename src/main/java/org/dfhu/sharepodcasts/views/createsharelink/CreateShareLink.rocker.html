@@ -4,4 +4,23 @@
 @args (ListenViewModel vm)
 
 @FullPage.template("Create Share Link", vm) -> {
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="well well-margin-top">
+                <h2>Comment</h2>
+                <p>On this page you may add a custom message to explain why you want to share this link.</p>
+                <p>This feature is optional.</p>
+                <ul>
+                    <li>How did it enrich your life?</li>
+                    <li>How did it remind you of someone?</li>
+                    <li>Why do you want to share</li>
+                </ul>
+                <p><strong>Note: This message will be public!</strong></p>
+                <hr>
+                @ShareLinkForm.template(vm)
+            </div>
+        </div>
+    </div>
+</div>
 }

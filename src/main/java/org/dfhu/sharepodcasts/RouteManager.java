@@ -26,6 +26,10 @@ public class RouteManager {
         return "/create-share-link";
     }
 
+    public static String saveShareLink() {
+        return "/save-share-link";
+    }
+
     public static String listen() {
         return "/l/:rowId";
     }
@@ -37,4 +41,9 @@ public class RouteManager {
     public static String privacyPolicy() {
         return "/legal/privacy-policy";
     }
+
+    public static String analyticsPixel() {
+        return "/onebyone";
+    }
+
 }

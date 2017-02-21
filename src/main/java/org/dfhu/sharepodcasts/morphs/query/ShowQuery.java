@@ -1,4 +1,4 @@
-package org.dfhu.sharepodcasts.morphs.finders;
+package org.dfhu.sharepodcasts.morphs.query;
 
 import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
@@ -6,11 +6,10 @@ import org.mongodb.morphia.Datastore;
 
 import java.util.Optional;
 
-public class ShowFinder extends BaseFinder {
-    private final Datastore datastore;
+public class ShowQuery extends BaseQuery {
 
-    public ShowFinder(Datastore datastore) {
-        this.datastore = datastore;
+    public ShowQuery(Datastore datastore) {
+        super(datastore);
     }
 
     public Optional<ShowMorph> byId(ObjectId id) {

@@ -1,15 +1,14 @@
-package org.dfhu.sharepodcasts.morphs.finders;
+package org.dfhu.sharepodcasts.morphs.query;
 
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.mongodb.morphia.Datastore;
 
 import java.util.Optional;
 
-public class EpisodeFinder extends BaseFinder {
-    private final Datastore datastore;
+public class EpisodeQuery extends BaseQuery {
 
-    public EpisodeFinder(Datastore datastore) {
-        this.datastore = datastore;
+    public EpisodeQuery(Datastore datastore) {
+        super(datastore);
     }
 
     public Optional<EpisodeMorph> byId(String id) {
