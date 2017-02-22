@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.Logger;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -15,7 +14,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 public class AnalyticsStoreTest {
 
     @Test
-    public void entryIsSaved() {
+    public void entryIsSaved() throws InterruptedException {
 
         Logger logger = mock(Logger.class);
         Datastore datastore = mock(Datastore.class);
@@ -24,10 +23,10 @@ public class AnalyticsStoreTest {
 
         AnalyticsStore analyticsStore = new AnalyticsStore(datastore, logger);
         analyticsStore.submit(entity);
+        analyticsStore.awaitTermination(1);
 
         verifyZeroInteractions(logger);
         verify(datastore, times(1)).save(entity);
-
     }
 
     @Test
@@ -41,7 +40,7 @@ public class AnalyticsStoreTest {
         when(datastore.save(entity)).thenThrow(new RuntimeException("Error message"));
         AnalyticsStore analyticsStore = new AnalyticsStore(datastore, logger);
         analyticsStore.submit(entity);
-        analyticsStore.awaitTerminiation(1);
+        analyticsStore.awaitTermination(1);
 
         verify(datastore, times(1)).save(entity);
         verify(logger, times(1)).error("Error message");

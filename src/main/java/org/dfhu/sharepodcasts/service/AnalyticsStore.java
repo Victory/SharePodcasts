@@ -39,7 +39,7 @@ public class AnalyticsStore {
      * @param timeoutInSeconds - how long to wait before exception
      * @throws InterruptedException
      */
-    public void awaitTerminiation(long timeoutInSeconds) throws InterruptedException {
+    public void awaitTermination(long timeoutInSeconds) throws InterruptedException {
         pool.awaitTermination(timeoutInSeconds, TimeUnit.SECONDS);
     }
 

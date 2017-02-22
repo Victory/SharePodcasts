@@ -12,7 +12,7 @@ import spark.Spark;
  */
 public abstract class TemplateRoute extends RouteAdder<TemplateRoute> implements Route {
 
-    public abstract RockerModel getRockerModel(Request request, Response response);
+    public abstract RockerModel getRockerModel(Request req, Response res);
 
     @Override
     public void doGet(RouteAdder<TemplateRoute> route) {

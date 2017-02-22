@@ -1,15 +1,14 @@
 package org.dfhu.sharepodcasts;
 
 import org.apache.commons.logging.LogFactory;
-import org.dfhu.sharepodcasts.approutes.AnalyticsRoute;
+import org.dfhu.sharepodcasts.approutes.*;
 import org.dfhu.sharepodcasts.controllers.*;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShareQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
-import org.dfhu.sharepodcasts.approutes.HomeRoute;
-import org.dfhu.sharepodcasts.approutes.ListenRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
+import org.dfhu.sharepodcasts.service.FeedStore;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.LoggerFactory;
 
@@ -28,12 +27,14 @@ public class SharePodcastsApplication {
         ShareQuery shareQuery = new ShareQuery(datastore);
         AnalyticsStore analyticsStore = new AnalyticsStore(
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
+        FeedStore feedStore = new FeedStore(datastore);
 
         addRoute(new AnalyticsRoute(analyticsStore));
 
-        controllerList.add(new CreateShareLinkController(showQuery, episodeQuery));
-        controllerList.add(new FeedController());
+        addRoute(new CreateShareLinkRoute(showQuery, episodeQuery));
+        addRoute(new AddFeedRoute(feedStore, LoggerFactory.getLogger(AddFeedRoute.class)));
         addRoute(new HomeRoute());
+
         controllerList.add(new LegalController());
         addRoute(new ListenRoute(showQuery, episodeQuery));
         controllerList.add(new SaveShareLinkController(episodeQuery, shareQuery));

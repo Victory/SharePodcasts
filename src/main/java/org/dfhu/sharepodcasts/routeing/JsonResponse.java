@@ -1,4 +1,4 @@
-package org.dfhu.sharepodcasts.viewmodels;
+package org.dfhu.sharepodcasts.routeing;
 
 public class JsonResponse {
     public final boolean success;

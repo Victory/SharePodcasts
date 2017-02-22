@@ -6,7 +6,8 @@ abstract class RouteAdder<T extends Route> {
     /** get the HTTP request method */
     protected abstract Route.METHOD getMethod();
 
-    public abstract void doGet(RouteAdder<T> routeAdder);
+    public void doGet(RouteAdder<T> routeAdder) { Halting.haltNotImplemented(); }
+    public void doPost(RouteAdder<T> routeAdder) { Halting.haltNotImplemented(); }
 
     public void addRoute() {
         Route.METHOD method = getMethod();
@@ -15,6 +16,8 @@ abstract class RouteAdder<T extends Route> {
                 doGet(this);
                 break;
             case POST:
+                doPost(this);
+                break;
             default:
                 throw new RuntimeException("Request Method not implemented");
         }

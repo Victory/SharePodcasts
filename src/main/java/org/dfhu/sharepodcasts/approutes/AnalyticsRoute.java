@@ -3,17 +3,16 @@ package org.dfhu.sharepodcasts.approutes;
 import com.google.gson.Gson;
 import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
-import org.dfhu.sharepodcasts.routeing.DirectRoute;
+import org.dfhu.sharepodcasts.routeing.BytesRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
 import spark.Request;
 import spark.Response;
-import spark.Spark;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AnalyticsRoute extends DirectRoute implements Route {
+public class AnalyticsRoute extends BytesRoute implements Route {
 
     private static final String oneByOne64 =
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
@@ -37,7 +36,7 @@ public class AnalyticsRoute extends DirectRoute implements Route {
     }
 
     @Override
-    public byte[] getBody(Request req, Response res) {
+    public byte[] getBytes(Request req, Response res) {
         res.header("Content-type", "image/png");
         res.header("Content-Length", "" + img.length);
         res.header("Cache-control", "no-cache, no-store, must-revalidate");

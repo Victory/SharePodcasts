@@ -1,40 +1,47 @@
-package org.dfhu.sharepodcasts.controllers;
+package org.dfhu.sharepodcasts.approutes;
 
-
+import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
-import org.dfhu.sharepodcasts.templateengine.RockerTemplateModel;
+import org.dfhu.sharepodcasts.routeing.Route;
+import org.dfhu.sharepodcasts.routeing.TemplateRoute;
 import org.dfhu.sharepodcasts.viewmodels.ListenViewModel;
 import org.dfhu.sharepodcasts.views.createsharelink.CreateShareLink;
 import spark.Request;
+import spark.Response;
 
 import java.util.Optional;
 
+import static org.dfhu.sharepodcasts.routeing.Halting.haltNotFound;
 
-public class CreateShareLinkController extends BaseController implements Controller {
+public class CreateShareLinkRoute extends TemplateRoute implements Route {
 
     private final ShowQuery showQuery;
     private final EpisodeQuery episodeQuery;
 
-    public CreateShareLinkController(ShowQuery showQuery, EpisodeQuery episodeQuery) {
+    public CreateShareLinkRoute(ShowQuery showQuery, EpisodeQuery episodeQuery) {
         this.showQuery = showQuery;
         this.episodeQuery = episodeQuery;
     }
 
     @Override
-    public void setupRoutes() {
-        doPost(RouteManager.createShareLink(),
-                (req, res) -> new RockerTemplateModel(listenTemplate(req)));
-
+    public String getPath() {
+        return RouteManager.createShareLink();
     }
 
-    private CreateShareLink listenTemplate(Request req) {
+    @Override
+    public METHOD getMethod() {
+        return METHOD.POST;
+    }
+
+    @Override
+    public RockerModel getRockerModel(Request req, Response res) {
         String id = req.queryParams("rowId");
         Optional<EpisodeMorph> episode = episodeQuery.byId(id);
-        //if (!episode.isPresent()) haltNotFound();
+        if (!episode.isPresent()) haltNotFound();
 
         Optional<ShowMorph> show = showQuery.byId(episode.get().showId);
         ListenViewModel vm = new ListenViewModel(show.get(), episode.get());

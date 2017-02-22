@@ -10,4 +10,8 @@ public class Halting {
     public static void haltNotFound() {
         halt(404, notFoundPage);
     }
+
+    public static void haltNotImplemented() {
+        halt(501, notFoundPage);
+    }
 }

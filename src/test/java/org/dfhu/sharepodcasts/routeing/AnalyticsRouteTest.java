@@ -28,7 +28,7 @@ public class AnalyticsRouteTest {
         Response response = mock(Response.class);
 
         AnalyticsRoute analyticsRoute = new AnalyticsRoute(analyticsStore);
-        analyticsRoute.getBody(request, response);
+        analyticsRoute.getBytes(request, response);
 
         ArgumentCaptor<RequestLogAnalytics> captor =
                 ArgumentCaptor.forClass(RequestLogAnalytics.class);
@@ -46,7 +46,7 @@ public class AnalyticsRouteTest {
         Response response = mock(Response.class);
 
         AnalyticsRoute analyticsRoute = new AnalyticsRoute(analyticsStore);
-        byte[] body = analyticsRoute.getBody(request, response);
+        byte[] body = analyticsRoute.getBytes(request, response);
 
         assertTrue(new String(body).contains("PNG"));
 
