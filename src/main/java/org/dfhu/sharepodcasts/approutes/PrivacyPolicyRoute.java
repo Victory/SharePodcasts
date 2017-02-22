@@ -2,28 +2,27 @@ package org.dfhu.sharepodcasts.approutes;
 
 import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
-import org.dfhu.sharepodcasts.routeing.TemplateRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
-import org.dfhu.sharepodcasts.viewmodels.HomeViewModel;
-import org.dfhu.sharepodcasts.views.home.Home;
+import org.dfhu.sharepodcasts.routeing.TemplateRoute;
+import org.dfhu.sharepodcasts.viewmodels.ViewModelUtil;
+import org.dfhu.sharepodcasts.views.legal.Privacy;
 import spark.Request;
 import spark.Response;
 
-public class HomeRoute extends TemplateRoute implements Route {
+public class PrivacyPolicyRoute extends TemplateRoute implements Route {
 
     @Override
     public String getPath() {
-        return RouteManager.home();
+        return RouteManager.privacyPolicy();
     }
 
     @Override
-    public Route.METHOD getMethod(){
+    public METHOD getMethod() {
         return METHOD.GET;
     }
 
     @Override
     public RockerModel getRockerModel(Request req, Response res) {
-        HomeViewModel vm = new HomeViewModel();
-        return Home.template(vm);
+        return Privacy.template(ViewModelUtil.NOOP);
     }
 }

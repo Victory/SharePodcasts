@@ -22,4 +22,11 @@ public abstract class TemplateRoute extends RouteAdder<TemplateRoute> implements
                 RockerTemplateEngine.getInstance());
     }
 
+    @Override
+    public void doPost(RouteAdder<TemplateRoute> route) {
+        Spark.post(
+                getPath(),
+                new RockerTemplateViewRoute(this),
+                RockerTemplateEngine.getInstance());
+    }
 }

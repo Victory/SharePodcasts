@@ -8,7 +8,6 @@ import org.dfhu.sharepodcasts.morphs.query.ShareQuery;
 
 import java.util.Optional;
 
-import static spark.Spark.halt;
 import static spark.Spark.post;
 
 public class SaveShareLinkController extends BaseController implements Controller {

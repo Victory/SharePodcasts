@@ -29,13 +29,13 @@ public class SharePodcastsApplication {
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
         FeedStore feedStore = new FeedStore(datastore);
 
+        addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));
 
         addRoute(new CreateShareLinkRoute(showQuery, episodeQuery));
         addRoute(new AddFeedRoute(feedStore, LoggerFactory.getLogger(AddFeedRoute.class)));
-        addRoute(new HomeRoute());
+        addRoute(new PrivacyPolicyRoute());
 
-        controllerList.add(new LegalController());
         addRoute(new ListenRoute(showQuery, episodeQuery));
         controllerList.add(new SaveShareLinkController(episodeQuery, shareQuery));
         controllerList.add(new SuggestController());
