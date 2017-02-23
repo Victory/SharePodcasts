@@ -1,6 +1,5 @@
 package org.dfhu.sharepodcasts;
 
-import org.apache.commons.logging.LogFactory;
 import org.dfhu.sharepodcasts.approutes.*;
 import org.dfhu.sharepodcasts.controllers.*;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
@@ -8,6 +7,7 @@ import org.dfhu.sharepodcasts.morphs.query.ShareQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
+import org.dfhu.sharepodcasts.service.EpisodeSuggestions;
 import org.dfhu.sharepodcasts.service.FeedStore;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.LoggerFactory;
@@ -28,6 +28,7 @@ public class SharePodcastsApplication {
         AnalyticsStore analyticsStore = new AnalyticsStore(
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
         FeedStore feedStore = new FeedStore(datastore);
+        EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(datastore);
 
         addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));
@@ -38,7 +39,7 @@ public class SharePodcastsApplication {
 
         addRoute(new ListenRoute(showQuery, episodeQuery));
         controllerList.add(new SaveShareLinkController(episodeQuery, shareQuery));
-        controllerList.add(new SuggestController());
+        addRoute(new EpisodeSuggestRoute(episodeSuggestions));
 
         SharePodcastsApplication.setupRoutes(controllerList);
     }

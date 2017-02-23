@@ -68,7 +68,7 @@ module.exports = {
                     throw e;
                 }
 
-                suggestions.forEach(item => {
+                suggestions.data.forEach(item => {
                     let $cur = $prototype.clone();
                     let $a = $cur.find("a");
                     $a.attr('href', '/l/' + item.rowId);
