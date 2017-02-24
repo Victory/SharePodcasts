@@ -25,10 +25,11 @@ public class SharePodcastsApplication {
         ShowQuery showQuery = new ShowQuery(datastore);
         EpisodeQuery episodeQuery = new EpisodeQuery(datastore);
         ShareQuery shareQuery = new ShareQuery(datastore);
+
         AnalyticsStore analyticsStore = new AnalyticsStore(
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
         FeedStore feedStore = new FeedStore(datastore);
-        EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(datastore);
+        EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(episodeQuery);
 
         addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));

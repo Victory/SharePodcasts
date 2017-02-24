@@ -14,16 +14,16 @@ import static org.powermock.api.mockito.PowerMockito.when;
 public class EpisodeSuggestRouteTest {
 
     @Test
-    public void callsEpisodeSuggetionsWithQuery() {
+    public void callsEpisodeSuggestionsWithQuery() {
         String expected = "some query";
-        Request request = mock(Request.class);
-        when(request.queryParams("q")).thenReturn(expected);
+        Request req = mock(Request.class);
+        when(req.queryParams("q")).thenReturn(expected);
         EpisodeSuggestions episodeSuggestions = mock(EpisodeSuggestions.class);
         when(episodeSuggestions.suggest(expected)).thenReturn(EMPTY_LIST);
 
         EpisodeSuggestRoute episodeSuggestRoute =
                 new EpisodeSuggestRoute(episodeSuggestions);
-        episodeSuggestions.suggest(expected);
+        episodeSuggestRoute.getGsonable(req, null);
 
         verify(episodeSuggestions, times(1)).suggest(expected);
     }

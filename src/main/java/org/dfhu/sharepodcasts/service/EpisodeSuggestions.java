@@ -1,18 +1,18 @@
 package org.dfhu.sharepodcasts.service;
 
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.query.Query;
+import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EpisodeSuggestions {
 
-    private final Datastore datastore;
+    private final EpisodeQuery episodeQuery;
 
-    public EpisodeSuggestions(Datastore datastore) {
-        this.datastore = datastore;
+    public EpisodeSuggestions(EpisodeQuery episodeQuery) {
+        this.episodeQuery = episodeQuery;
     }
 
     /**
@@ -21,16 +21,11 @@ public class EpisodeSuggestions {
      * @return
      */
     public List<SuggestResponse> suggest(String keyword) {
-        Query<EpisodeMorph> query = datastore.createQuery(EpisodeMorph.class)
-                .search(keyword)
-                .order("pubDate");
-        List<EpisodeMorph> episodes = query.asList();
+        List<EpisodeMorph> episodes = episodeQuery.textSearch(keyword);
 
-
-        final List<SuggestResponse> results = new LinkedList<>();
-        episodes.stream().forEach(e -> {
-            results.add(new SuggestResponse(e.title, e.showTitle, e.id.toString()));
-        });
+        List<SuggestResponse> results = episodes.stream().map(e ->
+                new SuggestResponse(e.title, e.showTitle, e.id.toString()))
+                .collect(Collectors.toList());
 
         return results;
     }
