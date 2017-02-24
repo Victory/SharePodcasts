@@ -18,7 +18,9 @@ public class BaseModel extends DefaultRockerModel {
      * @return
      */
     public static String attr(String attr) {
-        // TODO
+        if (attr.contains("\"")) {
+            return attr.replace("\"", "&quot;");
+        }
         return attr;
     }
 }
