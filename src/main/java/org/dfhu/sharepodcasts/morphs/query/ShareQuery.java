@@ -12,4 +12,12 @@ public class ShareQuery extends BaseQuery {
     public void save(ShareMorph shareMorph) {
         datastore.save(shareMorph);
     }
+
+    public boolean shortLinkExists(String key) {
+        ShareMorph shareMorph = datastore.createQuery(ShareMorph.class)
+                .filter("shortLink = ", key)
+                .get();
+
+        return shareMorph != null;
+    }
 }

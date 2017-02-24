@@ -106,6 +106,10 @@ a.btn.btn-raised.btn-primary:disabled
     background-color: #F1F1F1;
 }
 
+.btn-skip {
+    margin-right: 10px;
+}
+
 .player {
     width: 150%;
 }

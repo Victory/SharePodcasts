@@ -1,5 +1,6 @@
 @import org.dfhu.sharepodcasts.views.layout.FullPage
 @import org.dfhu.sharepodcasts.viewmodels.*
+@import org.dfhu.sharepodcasts.views.listen.Details;
 
 @args (ListenViewModel vm)
 
@@ -20,6 +21,13 @@
                 <hr>
                 @ShareLinkForm.template(vm)
             </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            @Details.template(vm)
         </div>
     </div>
 </div>

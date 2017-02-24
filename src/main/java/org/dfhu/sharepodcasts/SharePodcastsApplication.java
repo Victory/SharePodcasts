@@ -1,7 +1,6 @@
 package org.dfhu.sharepodcasts;
 
 import org.dfhu.sharepodcasts.approutes.*;
-import org.dfhu.sharepodcasts.controllers.*;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShareQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
@@ -9,18 +8,13 @@ import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
 import org.dfhu.sharepodcasts.service.EpisodeSuggestions;
 import org.dfhu.sharepodcasts.service.FeedStore;
+import org.dfhu.sharepodcasts.service.ShortLinkCreator;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class SharePodcastsApplication {
 
     public static void init(Datastore datastore) {
-
-        List<Controller> controllerList = new ArrayList<>();
 
         ShowQuery showQuery = new ShowQuery(datastore);
         EpisodeQuery episodeQuery = new EpisodeQuery(datastore);
@@ -30,7 +24,10 @@ public class SharePodcastsApplication {
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
         FeedStore feedStore = new FeedStore(datastore);
         EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(episodeQuery);
+        ShortLinkCreator shortLinkCreator =
+                new ShortLinkCreator(shareQuery, LoggerFactory.getLogger(ShortLinkCreator.class));
 
+        // Setup all the routes
         addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));
 
@@ -39,18 +36,18 @@ public class SharePodcastsApplication {
         addRoute(new PrivacyPolicyRoute());
 
         addRoute(new ListenRoute(showQuery, episodeQuery));
-        controllerList.add(new SaveShareLinkController(episodeQuery, shareQuery));
+
+        addRoute(new SaveShareLinkRoute(
+                shortLinkCreator,
+                shareQuery,
+                LoggerFactory.getLogger(SaveShareLinkRoute.class)));
+
         addRoute(new EpisodeSuggestRoute(episodeSuggestions));
 
-        SharePodcastsApplication.setupRoutes(controllerList);
     }
 
     private static void addRoute(Route route) {
         route.addRoute();
-    }
-
-    private static void setupRoutes(Collection<Controller> controllers) {
-        controllers.stream().forEach(c -> c.setupRoutes());
     }
 
 }

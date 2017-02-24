@@ -51,9 +51,5 @@ public class AnalyticsRouteTest {
         assertTrue(new String(body).contains("PNG"));
 
         verify(response, times(1)).header("Content-type", "image/png");
-
-        ArgumentCaptor<RequestLogAnalytics> captor =
-                ArgumentCaptor.forClass(RequestLogAnalytics.class);
-        verify(analyticsStore, times(1)).submit(captor.capture());
     }
 }

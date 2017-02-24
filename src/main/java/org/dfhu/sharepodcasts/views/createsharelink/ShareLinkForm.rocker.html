@@ -14,11 +14,16 @@
                 Type Your Public Comment Here
                 <small>(Optional).</small>
             </label>
-            <textarea id="t1" class="form-control" autocomplete="off"></textarea>
+            <textarea id="t1" class="form-control" autocomplete="off" name="comment"></textarea>
         </div>
 
-
         <div class="form-group text-right">
+            <button type="button"
+                    vic-custom-link-skip="@attr(vm.getEpisode().id.toString())"
+                    class="btn btn-secondary btn-raised btn-skip">
+                Skip this Step
+            </button>
+
             <button class="btn btn-primary btn-raised">
                 Create
             </button>
