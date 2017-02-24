@@ -37,10 +37,10 @@ In no particular order
  - Add browse feeds and episodes pages
  - Add a field to episodes collection to search text and index on that
  - Add text explaining the site on the homepage
- - Web Analytics
+ - Web Analytics frontend
  - Top lists
  - Add collection for seeing how often people add already existing shows
  - Contact form
  - More informative 404 pages
- - Add skip step button to create-share-link page
+ - Show suggest tooltip only if disabled
  

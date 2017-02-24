@@ -100,8 +100,8 @@ input.form-control {
     height: 30px;
 }
 
-a.btn.btn-raised.btn-primary[disabled],
-a.btn.btn-raised.btn-primary:disabled
+button.btn.btn-raised.btn-primary[disabled],
+button.btn.btn-raised.btn-primary:disabled
 {
     background-color: #F1F1F1;
 }

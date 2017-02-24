@@ -23,18 +23,7 @@
 </head>
 <body>
 
-<div class="header-panel">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6">
-                <a href="/"><h1>Home</h1></a>
-            </div>
-            <div class="col-xs-6">
-                <h1>@title</h1>
-            </div>
-        </div>
-    </div>
-</div>
+@HeaderNavBar.template(title)
 
 @body
 
@@ -51,6 +40,7 @@
 
 <script type="application/javascript">
     $.material.init();
+    $('[data-toggle="tooltip"]').tooltip();
 </script>
 <script type="application/javascript" src="/js/bundle.js"></script>
 <img id="one-by-one" />
