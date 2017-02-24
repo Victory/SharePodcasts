@@ -10,6 +10,7 @@ import spark.Response;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -51,5 +52,26 @@ public class AnalyticsRouteTest {
         assertTrue(new String(body).contains("PNG"));
 
         verify(response, times(1)).header("Content-type", "image/png");
+    }
+
+    @Test
+    public void getsPathname() {
+        String expected = "/some/path";
+
+        AnalyticsStore analyticsStore = mock(AnalyticsStore.class);
+        Request request = mock(Request.class);
+        when(request.queryParams("pathname")).thenReturn(expected);
+        Response response = mock(Response.class);
+
+        AnalyticsRoute analyticsRoute = new AnalyticsRoute(analyticsStore);
+        analyticsRoute.getBytes(request, response);
+
+        verify(request, times(1)).queryParams("pathname");
+
+        ArgumentCaptor<RequestLogAnalytics> captor =
+                ArgumentCaptor.forClass(RequestLogAnalytics.class);
+
+        verify(analyticsStore, times(1)).submit(captor.capture());
+        assertEquals(expected, captor.getValue().pathname);
     }
 }

@@ -45,4 +45,3 @@ In no particular order
  - More informative 404 pages
  - implement @attr()
  - Add skip step button to create-share-link page
- - Add page url as field in request analytics collection

@@ -12,4 +12,5 @@ public class RequestLogAnalytics {
     public String userAgent;
     public String headers;
     public long timeStamp;
+    public String pathname;
 }

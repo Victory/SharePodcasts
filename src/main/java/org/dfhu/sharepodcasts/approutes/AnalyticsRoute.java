@@ -43,11 +43,15 @@ public class AnalyticsRoute extends BytesRoute implements Route {
         res.header("Pragma", "no-cache");
         res.header("Expires", "0");
 
+        String pathname = req.queryParams("pathname");
+
         RequestLogAnalytics log = new RequestLogAnalytics();
         log.ip = req.ip();
         log.timeStamp = System.currentTimeMillis();
         log.userAgent = req.userAgent();
         log.headers = new Gson().toJson(req.headers());
+        log.pathname = pathname;
+
         analyticsStore.submit(log);
 
         return img;

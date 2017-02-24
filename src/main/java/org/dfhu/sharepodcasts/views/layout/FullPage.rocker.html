@@ -55,7 +55,8 @@
 <script type="application/javascript" src="/js/bundle.js"></script>
 <img id="one-by-one" />
 <script>
-    document.getElementById("one-by-one").src = "/onebyone";
+    document.getElementById("one-by-one").src = "/onebyone?pathname=" +
+        encodeURIComponent(document.location.pathname);
 </script>
 
 </body>
