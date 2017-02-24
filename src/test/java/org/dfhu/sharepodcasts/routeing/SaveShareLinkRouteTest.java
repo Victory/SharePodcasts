@@ -47,7 +47,7 @@ public class SaveShareLinkRouteTest {
                 new SaveShareLinkRoute(shortLinkCreator, shareQuery, null);
         saveShareLinkRoute.updateResponse(req, res);
 
-        verify(res, times(1)).redirect("/s/" + expected);
+        verify(res, times(1)).redirect("/l/" + expected);
     }
 
     @Test

@@ -49,7 +49,7 @@ public class SaveShareLinkRoute extends BodylessRoute implements Route {
         shareMorph.ip = req.ip();
 
         String key = save(shareMorph);
-        res.redirect("/s/" + key);
+        res.redirect("/l/" + key);
     }
 
     private String save(ShareMorph shareMorph) {

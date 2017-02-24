@@ -7,6 +7,9 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class ShortLinkCreator {
+
+    public static final int SHORT_LINK_LENGTH = 8;
+
     private final ShareQuery shareQuery;
     private final Logger logger;
 
@@ -37,6 +40,6 @@ public class ShortLinkCreator {
 
     private String nextShareLink() {
         String s = new BigInteger(64, random).toString(32);
-        return s.substring(0, 8);
+        return s.substring(0, SHORT_LINK_LENGTH);
     }
 }

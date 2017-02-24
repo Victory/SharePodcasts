@@ -3,6 +3,18 @@
 @args(ListenViewModel vm)
 
 
+@if (vm.hasShareComment()) {
+<div class="well well-margin-top">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                @raw(vm.getShareComment())
+            </p>
+        </div>
+    </div>
+</div>
+}
+
 <div class="well well-margin-top">
     <div class="row">
         <div class="col-xs-12">

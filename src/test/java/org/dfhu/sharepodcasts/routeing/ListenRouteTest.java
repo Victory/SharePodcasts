@@ -6,6 +6,7 @@ import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.dfhu.sharepodcasts.approutes.ListenRoute;
+import org.junit.Ignore;
 import org.junit.Test;
 import spark.HaltException;
 import spark.Request;
@@ -28,7 +29,7 @@ public class ListenRouteTest {
         EpisodeQuery episodeQuery = mock(EpisodeQuery.class);
         when(episodeQuery.byId(target)).thenReturn(Optional.ofNullable(null));
 
-        ListenRoute listenRoute = new ListenRoute(null, episodeQuery);
+        ListenRoute listenRoute = new ListenRoute(null, episodeQuery, null);
         listenRoute.getRockerModel(req, null);
     }
 
@@ -46,6 +47,12 @@ public class ListenRouteTest {
         String actual = listenRoute.getRockerModel(req, null).render().toString();
 
         assertTrue(actual.contains(targetEpisodeUrl));
+    }
+
+    @Test
+    @Ignore
+    public void UsesShareLinkWhenShortLink() {
+
     }
 
     private ListenRoute getListenRoute(String targetEpisodeUrl, String targetRowId, ObjectId showId) {
@@ -71,6 +78,6 @@ public class ListenRouteTest {
         Optional<ShowMorph> show = Optional.of(showMorph);
         when(showQuery.byId(showId)).thenReturn(show);
 
-        return new ListenRoute(showQuery, episodeQuery);
+        return new ListenRoute(showQuery, episodeQuery, null);
     }
 }
