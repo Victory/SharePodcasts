@@ -23,9 +23,10 @@ public class FeedStore {
     /**
      * Stores the the rss feed in the Datastore. This is a blocking operation.
      * @param url - full your of the rss feed
+     * @param usersIp - the ip from the Request
      * @return - title of the show added
      */
-    public String submit(String url) throws IOException {
+    public String submit(String url, String usersIp) throws IOException {
         InputStream inputStream = new URL(url).openConnection().getInputStream();
         Document doc = Jsoup.parse(inputStream, "UTF-8", "", Parser.xmlParser());
         JsoupFeed feed = new JsoupFeed(url, doc);
@@ -37,6 +38,8 @@ public class FeedStore {
         showMorph.copyright = feed.getCopyright();
         showMorph.showUrl = feed.getShowUrl();
         showMorph.author = feed.getAuthor();
+        showMorph.timeStamp = System.currentTimeMillis();
+        showMorph.ip = usersIp;
 
 
         try {

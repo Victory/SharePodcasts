@@ -38,7 +38,7 @@ public class AddFeedRoute extends JsonRoute implements Route {
         String msg;
         logger.info("Adding feed: " + url);
         try {
-            String title = feedStore.submit(url);
+            String title = feedStore.submit(url, req.ip());
             msg = "The Podcast \"" + title + "\" has been added. Try searching for an episode title now";
             success = true;
         } catch (Throwable t) {

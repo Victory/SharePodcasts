@@ -20,4 +20,6 @@ public class ShowMorph {
     public String showUrl;
     public String copyright;
     public String author;
+    public String ip;
+    public long timeStamp;
 }

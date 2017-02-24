@@ -17,17 +17,19 @@ import static org.powermock.api.mockito.PowerMockito.when;
 public class AddFeedRouteTest {
 
     @Test
-    public void submitsUrl() throws IOException {
+    public void submitsUrlAndIp() throws IOException {
         String url = "http://example.com/feed/";
+        String ip = "1.2.3.4";
 
         FeedStore feedStore = mock(FeedStore.class);
         Logger logger = mock(Logger.class);
         AddFeedRoute addFeedRoute = new AddFeedRoute(feedStore, logger);
         Request req = mock(Request.class);
+        when(req.ip()).thenReturn(ip);
         when(req.queryParams("url")).thenReturn(url);
 
         addFeedRoute.getGsonable(req, null);
-        verify(feedStore, times(1)).submit(url);
+        verify(feedStore, times(1)).submit(url, ip);
     }
 
     @Test
@@ -38,3 +40,4 @@ public class AddFeedRouteTest {
         assertTrue(addFeedRoute.getMethod() == Route.METHOD.POST);
     }
 }
+

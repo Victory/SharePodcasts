@@ -39,8 +39,8 @@ In no particular order
  - Add text explaining the site on the homepage
  - Web Analytics
  - Top lists
- - Add a field to shows to store originating ip (i.e. who put in the ip)
  - Add collection for seeing how often people add already existing shows
  - Contact form
  - More informative 404 pages
  - Add skip step button to create-share-link page
+ 
