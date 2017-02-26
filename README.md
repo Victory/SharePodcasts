@@ -43,4 +43,4 @@ In no particular order
  - Contact form
  - More informative 404 pages
  - Show suggest tooltip only if disabled
- 
+ - Make an application test that starts Spark

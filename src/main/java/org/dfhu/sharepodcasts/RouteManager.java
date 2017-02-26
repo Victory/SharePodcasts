@@ -46,4 +46,7 @@ public class RouteManager {
         return "/onebyone";
     }
 
+    public static String browse() {
+        return "/browse";
+    }
 }
