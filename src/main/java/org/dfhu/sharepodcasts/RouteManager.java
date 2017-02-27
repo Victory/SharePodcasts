@@ -49,4 +49,8 @@ public class RouteManager {
     public static String browse() {
         return "/browse";
     }
+
+    public static String browseLetter() {
+        return "/browse/:letter";
+    }
 }

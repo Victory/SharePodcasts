@@ -1,7 +1,7 @@
 @import org.dfhu.sharepodcasts.views.layout.FullPage
 @import org.dfhu.sharepodcasts.viewmodels.*
 
-@args(BrowseHomeViewModel vm)
+@args(BrowseLetterViewModel vm)
 
 @FullPage.template("Browse Podcasts", vm) -> {
 <div class="container">
@@ -13,7 +13,7 @@
 
 
             <ul class="browse-list-letters">
-                @ShowLetters.template(vm)
+                @ShowLetter.template(vm)
             </ul>
 
         </div>

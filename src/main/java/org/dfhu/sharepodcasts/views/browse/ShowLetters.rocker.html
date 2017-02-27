@@ -1,0 +1,12 @@
+@import org.dfhu.sharepodcasts.views.layout.FullPage
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args(BrowseHomeViewModel vm)
+
+@for (l: vm.getShowLetters()) {
+<li>
+    <a class="well" href="/browse/@attr(l.titleLetter)">@l.titleLetter
+        <small class="pull-right">(@l.count)</small>
+    </a>
+</li>
+}

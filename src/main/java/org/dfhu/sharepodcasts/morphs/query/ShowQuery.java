@@ -11,8 +11,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.mongodb.client.model.Filters.regex;
 import static org.mongodb.morphia.aggregation.Accumulator.accumulator;
 import static org.mongodb.morphia.aggregation.Group.grouping;
 import static org.mongodb.morphia.aggregation.Group.id;
@@ -42,5 +44,12 @@ public class ShowQuery extends BaseQuery {
                 .sort(descending("id"));
         Iterator<ShowLettersMorph> aggregate = pipe.aggregate(ShowLettersMorph.class);
         return StreamUtils.toStream(aggregate).collect(Collectors.toList());
+    }
+
+    public List<ShowMorph> getShowsByLetter(String letter) {
+        Pattern r = Pattern.compile("^" + letter + ".*");
+        return datastore.find(ShowMorph.class)
+                .filter("title", r)
+                .asList();
     }
 }
