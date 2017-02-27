@@ -23,6 +23,16 @@ You must have the Rocker Gradle Plugin which is not yet in maven central, so has
     ../../SharePodcasts/gradlew build
     ../../SharePodcasts/gradlew uploadArchives
     
+You can then compile rocker with
+     
+     ./gradlew rockerCompile
+     
+### Testing
+
+Tests are in `src/main/test` and can be run with gradle
+
+     ./gradlew rockerCompile build test
+
 ### Compiling javascript
 Javascript is compiled with webpack.
 
