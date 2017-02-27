@@ -34,6 +34,8 @@ public class BrowseHomeRouteTest {
         BrowseHomeViewModel vm = rockerModel.vm();
         List<ShowLettersMorph> activeLetters = vm.getShowLetters();
         assertEquals(2, activeLetters.size());
+
+        assertEquals("A", activeLetters.get(0).titleLetter);
         assertEquals("C", activeLetters.get(1).titleLetter);
     }
 }

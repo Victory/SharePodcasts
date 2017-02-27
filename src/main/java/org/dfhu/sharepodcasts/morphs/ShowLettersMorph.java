@@ -13,4 +13,5 @@ public class ShowLettersMorph {
     @AlsoLoad("value")
     public int count;
     public List<String> shows;
+    public String letter;
 }

@@ -1,16 +1,11 @@
 package org.dfhu.sharepodcasts.morphs.query;
 
-import com.mongodb.*;
-import com.mongodb.util.JSON;
 import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.morphs.ShowLettersMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.util.StreamUtils;
-import org.mongodb.morphia.AdvancedDatastore;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.aggregation.AggregationPipeline;
-import org.mongodb.morphia.aggregation.Projection;
-import org.mongodb.morphia.query.Query;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -41,7 +36,7 @@ public class ShowQuery extends BaseQuery {
     public List<ShowLettersMorph> getShowLetters() {
         AggregationPipeline pipe = datastore.createAggregation(ShowMorph.class)
                 .project(projection("id"), projection("title"))
-                .group(id(grouping("titleLetter", accumulator("$substr", Arrays.asList("$title", 0, 1)))),
+                .group(grouping("_id", accumulator("$substr", Arrays.asList("$title", 0, 1))),
                         grouping("count", accumulator("$sum", 1)),
                         grouping("shows", accumulator("$push", "title")))
                 .sort(descending("id"));

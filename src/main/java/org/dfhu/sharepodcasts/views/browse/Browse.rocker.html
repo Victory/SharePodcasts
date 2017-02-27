@@ -13,14 +13,13 @@
 
 
             <ul class="browse-list-letters">
-                <li><a class="well" href="/browse/a">A</a></li>
-                <li><a class="well" href="/browse/b">B</a></li>
-                <li><a class="well" href="/browse/c">C</a></li>
-                <li><a class="well" href="/browse/d">D</a></li>
-                <li><a class="well" href="/browse/a">E</a></li>
-                <li><a class="well" href="/browse/a">F</a></li>
-                <li><a class="well" href="/browse/a">G</a></li>
-                <li><a class="well" href="/browse/a">H</a></li>
+                @for (l: vm.getShowLetters()) {
+                <li>
+                    <a class="well" href="/browse/@attr(l.titleLetter)">@l.titleLetter
+                        <small class="pull-right">(@l.count)</small>
+                    </a>
+                </li>
+                }
             </ul>
 
         </div>
