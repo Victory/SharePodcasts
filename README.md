@@ -44,7 +44,6 @@ In no particular order
 
  - Build the feed updater thread pool and executor
  - Terms of Service
- - Add browse feeds and episodes pages
  - Add a field to episodes collection to search text and index on that
  - Add text explaining the site on the homepage
  - Web Analytics frontend
@@ -52,5 +51,6 @@ In no particular order
  - Add collection for seeing how often people add already existing shows
  - Contact form
  - More informative 404 pages
- - Show suggest tooltip only if disabled
+ - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
+ - Add share links (quick and customized) on Listen page

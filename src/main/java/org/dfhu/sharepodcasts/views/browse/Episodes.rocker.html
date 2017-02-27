@@ -1,11 +1,12 @@
 @import org.dfhu.sharepodcasts.views.layout.FullPage
 @import org.dfhu.sharepodcasts.viewmodels.*
 
-@args(BrowseLetterViewModel vm)
+@args(BrowseEpisodesViewModel vm)
 
-@for (show: vm.getShows()) {
+@for (episode: vm.getEpisodes()) {
 <li>
-    <a class="well" href="/browse/show/@attr(show.id.toString())">@show.title
+    <a class="well" href="/l/@attr(episode.id.toString())">
+        @episode.title
         <small class="pull-right"></small>
     </a>
 </li>

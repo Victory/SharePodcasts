@@ -1,0 +1,21 @@
+@import org.dfhu.sharepodcasts.views.layout.FullPage
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args(BrowseEpisodesViewModel vm)
+
+@FullPage.template("Browse Podcasts", vm) -> {
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="well">
+                <h3>Browse Podcasts</h3>
+            </div>
+
+            <ul class="browse-list-letters">
+                @Episodes.template(vm)
+            </ul>
+
+        </div>
+    </div>
+</div>
+}

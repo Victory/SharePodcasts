@@ -53,4 +53,8 @@ public class RouteManager {
     public static String browseLetter() {
         return "/browse/:letter";
     }
+
+    public static String browseEpisodes() {
+        return "/browse/show/:id";
+    }
 }

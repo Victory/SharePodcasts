@@ -32,6 +32,7 @@ public class SharePodcastsApplication {
         addRoute(new AnalyticsRoute(analyticsStore));
         addRoute(new BrowseHomeRoute(showQuery));
         addRoute(new BrowseLetterRoute(showQuery));
+        addRoute(new BrowseEpisodesRoute(episodeQuery));
 
         addRoute(new CreateShareLinkRoute(showQuery, episodeQuery));
         addRoute(new AddFeedRoute(feedStore, LoggerFactory.getLogger(AddFeedRoute.class)));

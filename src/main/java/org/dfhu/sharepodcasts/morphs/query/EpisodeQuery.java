@@ -1,5 +1,6 @@
 package org.dfhu.sharepodcasts.morphs.query;
 
+import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.mongodb.morphia.Datastore;
 
@@ -19,10 +20,17 @@ public class EpisodeQuery extends BaseQuery {
         return Optional.ofNullable(episode);
     }
 
+    public List<EpisodeMorph> byShowId(String showId) {
+        return datastore.createQuery(EpisodeMorph.class)
+                .filter("showId = ", toObjectId(showId))
+                .asList();
+    }
+
     public List<EpisodeMorph> textSearch(String keyword) {
         return datastore.createQuery(EpisodeMorph.class)
                 .search(keyword)
                 .order("pubDate")
                 .asList();
     }
+
 }
