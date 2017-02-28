@@ -2,6 +2,11 @@
 
 @args (String title, ViewModel vm, RockerBody body)
 
+@if (vm.isAjax()) {
+    @body
+}
+
+@if (!vm.isAjax()) {
 @raw(docType())
 <html>
 <head>
@@ -40,5 +45,6 @@
 
 </body>
 </html>
+}
 
 

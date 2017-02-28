@@ -26,7 +26,7 @@ public class ListenViewModelTest {
         shareMorph.comment = comment;
 
         ListenViewModel listenViewModel =
-                new ListenViewModel(null, null, shareMorph);
+                new ListenViewModel(null, null,null, null, shareMorph);
         String actual = listenViewModel.getShareComment();
         assertEquals(expected, actual);
     }

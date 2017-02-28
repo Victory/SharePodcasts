@@ -45,7 +45,7 @@ public class CreateShareLinkRoute extends TemplateRoute implements Route {
 
         Optional<ShowMorph> show = showQuery.byId(episode.get().showId);
         CreateShareLinkViewModel vm =
-                new CreateShareLinkViewModel(show.get(), episode.get());
+                new CreateShareLinkViewModel(req, res, show.get(), episode.get());
         return CreateShareLink.template(vm);
     }
 }

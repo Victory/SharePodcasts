@@ -35,7 +35,7 @@ public class BrowseEpisodesRoute extends TemplateRoute implements Route {
     public RockerModel getRockerModel(Request req, Response res) {
         String showId = req.params("id");
         List<EpisodeMorph> episodes = episodeQuery.byShowId(showId);
-        BrowseEpisodesViewModel vm = new BrowseEpisodesViewModel(episodes);
+        BrowseEpisodesViewModel vm = new BrowseEpisodesViewModel(req, res, episodes);
         return BrowseEpisodes.template(vm);
     }
 }

@@ -23,7 +23,7 @@ public class HomeRoute extends TemplateRoute implements Route {
 
     @Override
     public RockerModel getRockerModel(Request req, Response res) {
-        HomeViewModel vm = new HomeViewModel();
+        HomeViewModel vm = new HomeViewModel(req, res);
         return Home.template(vm);
     }
 }

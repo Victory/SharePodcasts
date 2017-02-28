@@ -63,7 +63,7 @@ public class ListenRoute extends TemplateRoute implements Route {
         if (!episode.isPresent()) haltNotFound();
 
         Optional<ShowMorph> show = showQuery.byId(episode.get().showId);
-        ListenViewModel vm = new ListenViewModel(show.get(), episode.get(), share);
+        ListenViewModel vm = new ListenViewModel(req, res, show.get(), episode.get(), share);
         return Listen.template(vm);
     }
 }

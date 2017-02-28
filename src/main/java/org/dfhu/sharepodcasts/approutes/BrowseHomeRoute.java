@@ -33,7 +33,7 @@ public class BrowseHomeRoute extends TemplateRoute implements Route {
     @Override
     public RockerModel getRockerModel(Request req, Response res) {
         List<ShowLettersMorph> showLetters = showQuery.getShowLetters();
-        BrowseHomeViewModel vm = new BrowseHomeViewModel(showLetters);
+        BrowseHomeViewModel vm = new BrowseHomeViewModel(req, res, showLetters);
         return Browse.template(vm);
     }
 }

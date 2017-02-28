@@ -36,7 +36,7 @@ public class BrowseLetterRoute extends TemplateRoute implements Route {
         String letter = req.params("letter");
         List<ShowMorph> showsByLetter =
                 showQuery.getShowsByLetter(letter);
-        BrowseLetterViewModel vm = new BrowseLetterViewModel(showsByLetter);
+        BrowseLetterViewModel vm = new BrowseLetterViewModel(req, res, showsByLetter);
         return BrowseLetter.template(vm);
     }
 }

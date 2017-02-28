@@ -5,6 +5,8 @@ import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShareMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.jsoup.Jsoup;
+import spark.Request;
+import spark.Response;
 
 public class ListenViewModel extends AbstractViewModel implements ViewModel {
 
@@ -18,7 +20,9 @@ public class ListenViewModel extends AbstractViewModel implements ViewModel {
      * @param episode - The episode
      * @param share - optional share for comments
      */
-    public ListenViewModel(ShowMorph show, EpisodeMorph episode, ShareMorph share) {
+    public ListenViewModel(Request req, Response res, ShowMorph show, EpisodeMorph episode, ShareMorph share) {
+        super(req, res);
+
         this.show = show;
         this.episode = episode;
         this.share = share;

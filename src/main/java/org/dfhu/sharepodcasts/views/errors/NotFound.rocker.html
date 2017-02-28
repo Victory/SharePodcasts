@@ -1,9 +1,9 @@
 @import org.dfhu.sharepodcasts.views.layout.FullPage
 @import org.dfhu.sharepodcasts.viewmodels.*
 
-@args ()
+@args (ViewModel vm)
 
-@FullPage.template("404 Not Found", ViewModelUtil.NOOP) -> {
+@FullPage.template("404 Not Found", vm) -> {
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
