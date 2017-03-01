@@ -54,3 +54,4 @@ In no particular order
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
  - Add share links (quick and customized) on Listen page
+ - Move "add feed" box to its own page, have it redirect to the feed added browse page

@@ -76,6 +76,4 @@ module.exports.importFeed = () => {
     $alertBox.click(evt => {
          $alertBox.html('');
     });
-
-    console.log("importFeed");
 };

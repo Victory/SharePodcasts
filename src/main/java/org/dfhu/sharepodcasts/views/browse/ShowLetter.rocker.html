@@ -5,7 +5,9 @@
 
 @for (show: vm.getShows()) {
 <li>
-    <a class="well" href="/browse/show/@attr(show.id.toString())">@show.title
+    <a class="well"
+       vic-body-box
+       href="/browse/show/@attr(show.id.toString())">@show.title
         <small class="pull-right"></small>
     </a>
 </li>

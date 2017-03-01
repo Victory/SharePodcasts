@@ -3,7 +3,7 @@
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                 <div>
                     <small style="font-size: .7em">MENU</small>
                     <span class="icon-bar" style="width: 100%"></span>
@@ -11,18 +11,24 @@
                     <span class="icon-bar" style="width: 100%"></span>
                 </div>
             </button>
-            <a class="navbar-brand" href="/">Share a Podcast</a>
+            <a class="navbar-brand"
+               vic-body-box
+               href="/">
+                Share a Podcast
+            </a>
         </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <div id="main-header-nav" class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="@attr(route().browse())">
+                    <a href="@attr(route().browse())"
+                        vic-body-box>
                         Browse Feeds
                         <div class="ripple-container"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="@attr(route().privacyPolicy())">
+                    <a href="@attr(route().privacyPolicy())"
+                        vic-body-box>
                         Privacy Policy
                         <div class="ripple-container"></div>
                     </a>

@@ -5,7 +5,9 @@
 
 @for (episode: vm.getEpisodes()) {
 <li>
-    <a class="well" href="/l/@attr(episode.id.toString())">
+    <a class="well"
+       vic-body-box
+       href="/l/@attr(episode.id.toString())">
         @episode.title
         <small class="pull-right"></small>
     </a>

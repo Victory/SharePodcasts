@@ -5,7 +5,9 @@
 
 @for (l: vm.getShowLetters()) {
 <li>
-    <a class="well" href="/browse/@attr(l.titleLetter)">@l.titleLetter
+    <a class="well"
+       vic-body-box
+       href="/browse/@attr(l.titleLetter)">@l.titleLetter
         <small class="pull-right">(@l.count)</small>
     </a>
 </li>

@@ -3,12 +3,12 @@
 
 @args(BrowseEpisodesViewModel vm)
 
-@FullPage.template("Browse Podcasts", vm) -> {
+@FullPage.template("Browse Episodes of: " + vm.getShowTitle(), vm) -> {
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="well">
-                <h3>Browse Podcasts</h3>
+                <h3>Episodes of "@vm.getShowTitle()"</h3>
             </div>
 
             <ul class="browse-list-letters">

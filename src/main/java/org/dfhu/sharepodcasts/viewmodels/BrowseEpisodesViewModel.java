@@ -16,6 +16,13 @@ public class BrowseEpisodesViewModel extends AbstractViewModel implements ViewMo
         this.episodes = episodes;
     }
 
+    public String getShowTitle() {
+        if (episodes.size() < 1) {
+            return "";
+        }
+        return episodes.get(0).showTitle;
+    }
+
     public List<EpisodeMorph> getEpisodes() {
         return episodes;
     }

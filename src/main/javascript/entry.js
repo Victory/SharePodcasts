@@ -1,15 +1,14 @@
-import {welcome} from './greetings.js'
 import {suggestKeyup} from './suggest.js'
 import {importFeed} from "./feed";
 import {buildPlayer} from "./listen";
 import {bindButtonUiActions} from "./buttons";
 import {bindSkipCustomShareLink} from "./createsharelink";
+import {bindBodyBox} from "./bodybox";
 
+bindBodyBox();
 buildPlayer();
-bindButtonUiActions();
 bindSkipCustomShareLink();
 
-// test greeting
-welcome();
+bindButtonUiActions();
 importFeed();
 suggestKeyup();
