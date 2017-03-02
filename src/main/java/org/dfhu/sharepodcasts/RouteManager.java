@@ -19,7 +19,11 @@ public class RouteManager {
     }
 
     public static String addFeed() {
-        return "/add-feed";
+        return "/new-feed-save";
+    }
+
+    public static String addFeedForm() {
+        return "/new-feed";
     }
 
     public static String createShareLink() {

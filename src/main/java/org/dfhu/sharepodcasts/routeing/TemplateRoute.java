@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import com.fizzed.rocker.RockerModel;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.templateengine.RockerTemplateEngine;
 import spark.Request;
 import spark.Response;
@@ -12,7 +13,7 @@ import spark.Spark;
  */
 public abstract class TemplateRoute extends RouteAdder<TemplateRoute> implements Route {
 
-    public abstract RockerModel getRockerModel(Request req, Response res);
+    public abstract RockerModel getRockerModel(Request req, Response res, VicSession vicSession);
 
     @Override
     public void doGet(RouteAdder<TemplateRoute> route) {

@@ -1,5 +1,6 @@
 package org.dfhu.sharepodcasts.routeing;
 
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.approutes.BrowseHomeRoute;
 import org.dfhu.sharepodcasts.morphs.ShowLettersMorph;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
@@ -20,6 +21,8 @@ public class BrowseHomeRouteTest {
     public void testGet() {
         ShowQuery showQuery = mock(ShowQuery.class);
 
+        VicSession vicSession = new VicSession(null, null);
+
         List<ShowLettersMorph> showLetters = Arrays.asList("A", "C").stream().map(c -> {
             ShowLettersMorph showLettersMorph = new ShowLettersMorph();
             showLettersMorph.titleLetter = c;
@@ -30,7 +33,7 @@ public class BrowseHomeRouteTest {
         BrowseHomeRoute browseHomeRoute
                 = new BrowseHomeRoute(showQuery);
         Browse rockerModel =
-                (Browse) browseHomeRoute.getRockerModel(null, null);
+                (Browse) browseHomeRoute.getRockerModel(null, null, vicSession);
         BrowseHomeViewModel vm = rockerModel.vm();
         List<ShowLettersMorph> activeLetters = vm.getShowLetters();
         assertEquals(2, activeLetters.size());

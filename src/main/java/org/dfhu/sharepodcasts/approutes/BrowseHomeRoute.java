@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.approutes;
 
 import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.ShowLettersMorph;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.dfhu.sharepodcasts.routeing.Route;
@@ -31,9 +32,9 @@ public class BrowseHomeRoute extends TemplateRoute implements Route {
     }
 
     @Override
-    public RockerModel getRockerModel(Request req, Response res) {
+    public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
         List<ShowLettersMorph> showLetters = showQuery.getShowLetters();
-        BrowseHomeViewModel vm = new BrowseHomeViewModel(req, res, showLetters);
+        BrowseHomeViewModel vm = new BrowseHomeViewModel(vicSession, showLetters);
         return Browse.template(vm);
     }
 }

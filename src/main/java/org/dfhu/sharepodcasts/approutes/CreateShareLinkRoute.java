@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.approutes;
 
 import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
@@ -38,14 +39,15 @@ public class CreateShareLinkRoute extends TemplateRoute implements Route {
     }
 
     @Override
-    public RockerModel getRockerModel(Request req, Response res) {
+    public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
         String id = req.queryParams("rowId");
         Optional<EpisodeMorph> episode = episodeQuery.byId(id);
         if (!episode.isPresent()) haltNotFound();
 
         Optional<ShowMorph> show = showQuery.byId(episode.get().showId);
         CreateShareLinkViewModel vm =
-                new CreateShareLinkViewModel(req, res, show.get(), episode.get());
+                new CreateShareLinkViewModel(
+                        vicSession, show.get(), episode.get());
         return CreateShareLink.template(vm);
     }
 }

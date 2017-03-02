@@ -7,7 +7,7 @@ import static spark.Spark.halt;
 
 public class Halting {
     private static final String notFoundPage =
-            NotFound.template(new ViewModelUtil.Noop(null, null))
+            NotFound.template(new ViewModelUtil.Noop())
                     .render()
                     .toString();
 

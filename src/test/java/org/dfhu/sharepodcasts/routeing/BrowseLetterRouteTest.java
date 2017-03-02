@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import com.fizzed.rocker.RockerModel;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.approutes.BrowseLetterRoute;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
@@ -25,6 +26,7 @@ public class BrowseLetterRouteTest {
         ShowQuery showQuery = mock(ShowQuery.class);
 
         Request req = mock(Request.class);
+        VicSession vicSession = new VicSession(req, null);
         String letter = "B";
         when(req.params("letter")).thenReturn(letter);
 
@@ -41,7 +43,7 @@ public class BrowseLetterRouteTest {
         BrowseLetterRoute browseLetterRoute =
                 new BrowseLetterRoute(showQuery);
         BrowseLetter browseLetterRouteRockerModel =
-                (BrowseLetter) browseLetterRoute.getRockerModel(req, null);
+                (BrowseLetter) browseLetterRoute.getRockerModel(req, null, vicSession);
 
         verify(req, times(1)).params("letter");
         List<ShowMorph> actual = browseLetterRouteRockerModel.vm().getShows();

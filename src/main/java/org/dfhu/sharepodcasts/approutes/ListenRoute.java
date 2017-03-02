@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.approutes;
 
 import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShareMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
@@ -43,7 +44,7 @@ public class ListenRoute extends TemplateRoute implements Route {
     }
 
     @Override
-    public RockerModel getRockerModel(Request req, Response res) {
+    public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
         String id = req.params(":rowId");
         if (id == null) haltNotFound();
 
@@ -63,7 +64,7 @@ public class ListenRoute extends TemplateRoute implements Route {
         if (!episode.isPresent()) haltNotFound();
 
         Optional<ShowMorph> show = showQuery.byId(episode.get().showId);
-        ListenViewModel vm = new ListenViewModel(req, res, show.get(), episode.get(), share);
+        ListenViewModel vm = new ListenViewModel(vicSession, show.get(), episode.get(), share);
         return Listen.template(vm);
     }
 }

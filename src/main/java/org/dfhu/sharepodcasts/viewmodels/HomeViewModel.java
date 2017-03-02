@@ -1,10 +1,11 @@
 package org.dfhu.sharepodcasts.viewmodels;
 
+import org.dfhu.sharepodcasts.VicSession;
 import spark.Request;
 import spark.Response;
 
 public class HomeViewModel extends AbstractViewModel implements ViewModel {
-    public HomeViewModel(Request req, Response res) {
-        super(req, res);
+    public HomeViewModel(VicSession vicSession) {
+        super(vicSession);
     }
 }

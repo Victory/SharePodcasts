@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import com.fizzed.rocker.RockerModel;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.approutes.BrowseEpisodesRoute;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
@@ -29,6 +30,8 @@ public class BrowseEpisodesRouteTest {
         Request req = mock(Request.class);
         when(req.params("id")).thenReturn(BaseMorphs.show1Id.toString());
 
+        VicSession vicSession = new VicSession(req, null);
+
         List<EpisodeMorph> episodes = IntStream.range(0, 3)
                 .mapToObj(ii -> {
                     EpisodeMorph episodeMorph = new EpisodeMorph();
@@ -40,7 +43,7 @@ public class BrowseEpisodesRouteTest {
 
         BrowseEpisodesRoute browseEpisodesRoute =
                 new BrowseEpisodesRoute(episodeQuery);
-        BrowseEpisodes browseEpisodes = (BrowseEpisodes) browseEpisodesRoute.getRockerModel(req, null);
+        BrowseEpisodes browseEpisodes = (BrowseEpisodes) browseEpisodesRoute.getRockerModel(req, null, vicSession);
         verify(req, times(1)).params("id");
 
         assertEquals(3, browseEpisodes.vm().getEpisodes().size());

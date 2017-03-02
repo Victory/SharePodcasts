@@ -26,7 +26,7 @@ public class BrowseHomeViewModelTest {
 
 
         BrowseHomeViewModel browseHomeViewModel =
-                new BrowseHomeViewModel(null, null, showLetters);
+                new BrowseHomeViewModel(null, showLetters);
 
         List<ShowLettersMorph> activeLetters = browseHomeViewModel.getShowLetters();
         assertEquals("A", activeLetters.get(0).titleLetter);

@@ -3,6 +3,7 @@ package org.dfhu.sharepodcasts.approutes;
 import com.fizzed.rocker.RockerModel;
 import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.routeing.Route;
@@ -32,10 +33,10 @@ public class BrowseEpisodesRoute extends TemplateRoute implements Route {
     }
 
     @Override
-    public RockerModel getRockerModel(Request req, Response res) {
+    public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
         String showId = req.params("id");
         List<EpisodeMorph> episodes = episodeQuery.byShowId(showId);
-        BrowseEpisodesViewModel vm = new BrowseEpisodesViewModel(req, res, episodes);
+        BrowseEpisodesViewModel vm = new BrowseEpisodesViewModel(vicSession, episodes);
         return BrowseEpisodes.template(vm);
     }
 }

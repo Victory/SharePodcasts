@@ -1,5 +1,6 @@
 package org.dfhu.sharepodcasts.viewmodels;
 
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import spark.Request;
 import spark.Response;
@@ -10,9 +11,8 @@ public class BrowseEpisodesViewModel extends AbstractViewModel implements ViewMo
 
     private final List<EpisodeMorph> episodes;
 
-    public BrowseEpisodesViewModel(Request req, Response res, List<EpisodeMorph> episodes) {
-        super(req, res);
-
+    public BrowseEpisodesViewModel(VicSession vicSession, List<EpisodeMorph> episodes) {
+        super(vicSession);
         this.episodes = episodes;
     }
 

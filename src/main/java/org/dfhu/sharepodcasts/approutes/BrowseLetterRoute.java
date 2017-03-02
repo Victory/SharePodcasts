@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.approutes;
 
 import com.fizzed.rocker.RockerModel;
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.dfhu.sharepodcasts.routeing.Route;
@@ -32,11 +33,11 @@ public class BrowseLetterRoute extends TemplateRoute implements Route {
     }
 
     @Override
-    public RockerModel getRockerModel(Request req, Response res) {
+    public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
         String letter = req.params("letter");
         List<ShowMorph> showsByLetter =
                 showQuery.getShowsByLetter(letter);
-        BrowseLetterViewModel vm = new BrowseLetterViewModel(req, res, showsByLetter);
+        BrowseLetterViewModel vm = new BrowseLetterViewModel(vicSession, showsByLetter);
         return BrowseLetter.template(vm);
     }
 }

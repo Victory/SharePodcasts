@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import org.bson.types.ObjectId;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
@@ -26,11 +27,12 @@ public class ListenRouteTest {
         Request req = mock(Request.class);
         when(req.params(":rowId")).thenReturn(target);
 
+        VicSession vicSession = new VicSession(req, null);
         EpisodeQuery episodeQuery = mock(EpisodeQuery.class);
         when(episodeQuery.byId(target)).thenReturn(Optional.ofNullable(null));
 
         ListenRoute listenRoute = new ListenRoute(null, episodeQuery, null);
-        listenRoute.getRockerModel(req, null);
+        listenRoute.getRockerModel(req, null, vicSession);
     }
 
     @Test
@@ -42,9 +44,10 @@ public class ListenRouteTest {
 
         Request req = mock(Request.class);
         when(req.params(":rowId")).thenReturn(targetRowId);
+        VicSession vicSession = new VicSession(req, null);
 
         ListenRoute listenRoute = getListenRoute(targetEpisodeUrl, targetRowId, showId);
-        String actual = listenRoute.getRockerModel(req, null).render().toString();
+        String actual = listenRoute.getRockerModel(req, null, vicSession).render().toString();
 
         assertTrue(actual.contains(targetEpisodeUrl));
     }

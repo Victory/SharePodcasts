@@ -1,5 +1,6 @@
 package org.dfhu.sharepodcasts.viewmodels;
 
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.morphs.ShowLettersMorph;
 import spark.Request;
 import spark.Response;
@@ -10,8 +11,8 @@ public class BrowseHomeViewModel extends AbstractViewModel implements ViewModel 
 
     private final List<ShowLettersMorph> showLetters;
 
-    public BrowseHomeViewModel(Request req, Response res, List<ShowLettersMorph> showLetters) {
-        super(req, res);
+    public BrowseHomeViewModel(VicSession vicSession, List<ShowLettersMorph> showLetters) {
+        super(vicSession);
         this.showLetters = showLetters;
     }
 

@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.routeing;
 
 import com.fizzed.rocker.RockerModel;
 import org.bson.types.ObjectId;
+import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.approutes.CreateShareLinkRoute;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
@@ -35,6 +36,7 @@ public class CreateShareLinkRouteTest {
 
         Request req = mock(Request.class);
         when(req.queryParams("rowId")).thenReturn(episode1Id.toString());
+        VicSession vicSession = new VicSession(req, null);
 
         Optional<EpisodeMorph> episode = Optional.empty();
         EpisodeQuery episodeQuery = mock(EpisodeQuery.class);
@@ -43,7 +45,7 @@ public class CreateShareLinkRouteTest {
         CreateShareLinkRoute createShareLinkRoute
                 = new CreateShareLinkRoute(null, episodeQuery);
 
-        createShareLinkRoute.getRockerModel(req, null);
+        createShareLinkRoute.getRockerModel(req, null, vicSession);
     }
 
     @Test
@@ -51,6 +53,7 @@ public class CreateShareLinkRouteTest {
 
         Request req = mock(Request.class);
         when(req.queryParams("rowId")).thenReturn(episode1Id.toString());
+        VicSession vicSession = new VicSession(req, null);
 
         EpisodeMorph episodeMorph = getEpisodeMorph1();
         Optional<EpisodeMorph> episode = Optional.of(episodeMorph);
@@ -67,7 +70,7 @@ public class CreateShareLinkRouteTest {
 
         assertTrue(createShareLinkRoute.getMethod() == Route.METHOD.POST);
 
-        RockerModel model = createShareLinkRoute.getRockerModel(req, null);
+        RockerModel model = createShareLinkRoute.getRockerModel(req, null, vicSession);
         String body = model.render().toString();
         assertTrue(body.contains(episode1Id.toString()));
 
