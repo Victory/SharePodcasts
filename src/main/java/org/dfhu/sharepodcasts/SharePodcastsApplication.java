@@ -22,12 +22,13 @@ public class SharePodcastsApplication {
 
         AnalyticsStore analyticsStore = new AnalyticsStore(
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
-        FeedStore feedStore = new FeedStore(datastore);
+        FeedStore feedStore = new FeedStore(datastore, showQuery);
         EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(episodeQuery);
         ShortLinkCreator shortLinkCreator =
                 new ShortLinkCreator(shareQuery, LoggerFactory.getLogger(ShortLinkCreator.class));
 
         // Setup all the routes
+        addRoute(new AddFeedFormRoute());
         addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));
         addRoute(new BrowseHomeRoute(showQuery));

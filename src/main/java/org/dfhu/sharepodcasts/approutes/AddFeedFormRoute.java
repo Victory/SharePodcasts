@@ -5,6 +5,8 @@ import org.dfhu.sharepodcasts.RouteManager;
 import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.routeing.TemplateRoute;
+import org.dfhu.sharepodcasts.viewmodels.AddFeedFormViewModel;
+import org.dfhu.sharepodcasts.views.addfeed.AddFeed;
 import spark.Request;
 import spark.Response;
 
@@ -21,6 +23,8 @@ public class AddFeedFormRoute extends TemplateRoute implements Route {
 
     @Override
     public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
-        return null;
+        AddFeedFormViewModel vm = new AddFeedFormViewModel(vicSession);
+        AddFeed template = AddFeed.template(vm);
+        return template;
     }
 }

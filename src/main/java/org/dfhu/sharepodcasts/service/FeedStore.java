@@ -3,10 +3,12 @@ package org.dfhu.sharepodcasts.service;
 import com.mongodb.DuplicateKeyException;
 import org.dfhu.sharepodcasts.JsoupFeed;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
+import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +17,11 @@ import java.net.URL;
 public class FeedStore {
 
     private final Datastore datastore;
+    private final ShowQuery showQuery;
 
-    public FeedStore(Datastore datastore) {
+    public FeedStore(Datastore datastore, ShowQuery showQuery) {
         this.datastore = datastore;
+        this.showQuery = showQuery;
     }
 
     /**
@@ -26,7 +30,7 @@ public class FeedStore {
      * @param usersIp - the ip from the Request
      * @return - title of the show added
      */
-    public String submit(String url, String usersIp) throws IOException {
+    public ShowMorph submit(String url, String usersIp) throws IOException {
         InputStream inputStream = new URL(url).openConnection().getInputStream();
         Document doc = Jsoup.parse(inputStream, "UTF-8", "", Parser.xmlParser());
         JsoupFeed feed = new JsoupFeed(url, doc);
@@ -41,7 +45,6 @@ public class FeedStore {
         showMorph.timeStamp = System.currentTimeMillis();
         showMorph.ip = usersIp;
 
-
         try {
             datastore.save(showMorph);
         } catch(DuplicateKeyException e) {
@@ -55,6 +58,6 @@ public class FeedStore {
             } catch (DuplicateKeyException e) {}
         });
 
-        return showMorph.title;
+        return showQuery.byUrl(showMorph.url).get();
     }
 }

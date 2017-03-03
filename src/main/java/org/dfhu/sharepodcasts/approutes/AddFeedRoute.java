@@ -1,6 +1,7 @@
 package org.dfhu.sharepodcasts.approutes;
 
 import org.dfhu.sharepodcasts.RouteManager;
+import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.routeing.JsonResponse;
 import org.dfhu.sharepodcasts.routeing.JsonRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
@@ -34,20 +35,27 @@ public class AddFeedRoute extends JsonRoute implements Route {
     public JsonResponse getGsonable(Request req, Response res) {
         String url = req.queryParams("url");
         boolean success = false;
-
         String msg;
         logger.info("Adding feed: " + url);
         try {
-            String title = feedStore.submit(url, req.ip());
-            msg = "The Podcast \"" + title + "\" has been added. Try searching for an episode title now";
+            ShowMorph show = feedStore.submit(url, req.ip());
+            msg = "The Podcast \"" + show.title + "\" has been added. Try searching for an episode title now";
             success = true;
+            ShowData showData = new ShowData();
+            showData.id = show.id.toString();
+            showData.title = show.title;
+
+            return new JsonResponse(success, msg, showData);
         } catch (Throwable t) {
             success = false;
             msg = "There was an error parsing feed. Please check the URL and try again.";
             logger.error("Error parsing feed: " + url + " " + t.getMessage());
+            return new JsonResponse(success, msg);
         }
-        logger.info("Feed added: " + url);
+    }
 
-        return new JsonResponse(success, msg);
+    public static class ShowData {
+        String id;
+        String title;
     }
 }

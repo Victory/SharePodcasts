@@ -34,7 +34,7 @@ module.exports.importFeed = () => {
 
         let val = $input.val();
         let xhr = $.ajax({
-            url: "/add-feed",
+            url: $form.attr('action'),
             data: {url: val},
             method: "POST",
             dataType: "json",
@@ -58,6 +58,11 @@ module.exports.importFeed = () => {
 
             $alertBox.html('');
             $alertBox.append(alert);
+
+            setTimeout(() => {
+
+                document.location = "/browse/show/" + data.data.id;
+            }, 500);
 
         });
 

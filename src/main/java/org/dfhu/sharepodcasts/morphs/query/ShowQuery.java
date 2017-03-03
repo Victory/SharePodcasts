@@ -35,6 +35,14 @@ public class ShowQuery extends BaseQuery {
         return Optional.ofNullable(show);
     }
 
+    public Optional<ShowMorph> byUrl(String url) {
+        ShowMorph show = datastore.createQuery(ShowMorph.class)
+                .filter("url = ", url)
+                .get();
+
+        return Optional.ofNullable(show);
+    }
+
     public List<ShowLettersMorph> getShowLetters() {
         AggregationPipeline pipe = datastore.createAggregation(ShowMorph.class)
                 .project(projection("id"), projection("title"))
@@ -52,4 +60,5 @@ public class ShowQuery extends BaseQuery {
                 .filter("title", r)
                 .asList();
     }
+
 }

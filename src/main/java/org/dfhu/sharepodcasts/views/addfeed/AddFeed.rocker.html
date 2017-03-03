@@ -1,0 +1,14 @@
+@import org.dfhu.sharepodcasts.views.layout.FullPage
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args (AddFeedFormViewModel vm)
+
+@FullPage.template("Share a Podcast", vm) -> {
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            @NewFeedForm.template()
+        </div>
+    </div>
+</div>
+}
