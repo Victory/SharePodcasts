@@ -6,12 +6,17 @@ import org.dfhu.sharepodcasts.approutes.PrivacyPolicyRoute;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.powermock.api.mockito.PowerMockito.mock;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 public class PrivacyPolicyRouteTest {
     @Test
     public void get() {
         PrivacyPolicyRoute privacyPolicyRoute = new PrivacyPolicyRoute();
-        VicSession vicSession = new VicSession(null, null);
+
+        VicSession vicSession = mock(VicSession.class);
+        when(vicSession.isAjax()).thenReturn(false);
+
         RockerModel privacyPolicyRouteRockerModel =
                 privacyPolicyRoute.getRockerModel(null, null, vicSession);
         String actual = privacyPolicyRouteRockerModel.render().toString();

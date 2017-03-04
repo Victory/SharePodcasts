@@ -24,6 +24,6 @@ public class PrivacyPolicyRoute extends TemplateRoute implements Route {
 
     @Override
     public RockerModel getRockerModel(Request req, Response res, VicSession vicSession) {
-        return Privacy.template(new ViewModelUtil.Noop());
+        return Privacy.template(new ViewModelUtil.Noop(req, res, vicSession));
     }
 }
