@@ -4,6 +4,7 @@ import org.dfhu.sharepodcasts.approutes.*;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShareQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
+import org.dfhu.sharepodcasts.routeing.Halting;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
 import org.dfhu.sharepodcasts.service.EpisodeSuggestions;
@@ -11,6 +12,7 @@ import org.dfhu.sharepodcasts.service.FeedStore;
 import org.dfhu.sharepodcasts.service.ShortLinkCreator;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.LoggerFactory;
+
 
 public class SharePodcastsApplication {
 
@@ -27,6 +29,8 @@ public class SharePodcastsApplication {
         ShortLinkCreator shortLinkCreator =
                 new ShortLinkCreator(shareQuery, LoggerFactory.getLogger(ShortLinkCreator.class));
 
+        Halting.bindInternalServerError(analyticsStore);
+
         // Setup all the routes
         addRoute(new AddFeedFormRoute());
         addRoute(new HomeRoute());
@@ -39,6 +43,7 @@ public class SharePodcastsApplication {
         addRoute(new AddFeedRoute(feedStore, LoggerFactory.getLogger(AddFeedRoute.class)));
         addRoute(new PrivacyPolicyRoute());
 
+        addRoute(new JsErrorRoute(analyticsStore));
         addRoute(new ListenRoute(showQuery, episodeQuery, shareQuery));
 
         addRoute(new SaveShareLinkRoute(

@@ -14,12 +14,10 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.mongodb.client.model.Filters.regex;
 import static org.mongodb.morphia.aggregation.Accumulator.accumulator;
 import static org.mongodb.morphia.aggregation.Group.grouping;
-import static org.mongodb.morphia.aggregation.Group.id;
 import static org.mongodb.morphia.aggregation.Projection.projection;
-import static org.mongodb.morphia.query.Sort.descending;
+import static org.mongodb.morphia.query.Sort.ascending;
 
 public class ShowQuery extends BaseQuery {
 
@@ -49,7 +47,7 @@ public class ShowQuery extends BaseQuery {
                 .group(grouping("_id", accumulator("$substr", Arrays.asList("$title", 0, 1))),
                         grouping("count", accumulator("$sum", 1)),
                         grouping("shows", accumulator("$push", "title")))
-                .sort(descending("id"));
+                .sort(ascending("_id"));
         Iterator<ShowLettersMorph> aggregate = pipe.aggregate(ShowLettersMorph.class);
         return StreamUtils.toStream(aggregate).collect(Collectors.toList());
     }

@@ -16,7 +16,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Share links to Podcast episodes, share them and play in your browser">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script>window.vic = {}</script>
+    <script>
+        window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+            setTimeout(function () {
+                var msg = 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
+                    + ' Column: ' + column + ' StackTrace: ' + errorObj + "arguments";
+
+                var img = document.createElement("img");
+                img.src = "/jserror?msg=" + encodeURIComponent(msg)
+                    + "&pathname=" + encodeURIComponent(document.location.pathname);
+                document.body.appendChild(img);
+            }, 300);
+
+        };
+    </script>
+
     @raw(vm.topScript())
 
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -43,8 +57,14 @@
 <script type="application/javascript" src="/js/bundle.js"></script>
 <img id="one-by-one" />
 <script>
-    document.getElementById("one-by-one").src = "/onebyone?pathname=" +
-        encodeURIComponent(document.location.pathname);
+    window.analytics = function () {
+        var img = document.getElementById("one-by-one");
+        var rnd = Math.random();
+        img.src = "/onebyone?rnd=" + rnd + "&pathname=" +
+            encodeURIComponent(document.location.pathname);
+    }
+
+    window.analytics();
 </script>
 
 </body>

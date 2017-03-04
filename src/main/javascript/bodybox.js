@@ -26,6 +26,8 @@ function ajaxLoadBodyBox(href, shouldPush) {
                 title: window.vic.title,
             };
             history.pushState(stateObj, "vic", href);
+            // defined in FullPage.rocker.html
+            window.analytics();
         }
     });
 }

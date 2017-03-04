@@ -1,5 +1,6 @@
 package org.dfhu.sharepodcasts.service;
 
+import org.dfhu.sharepodcasts.morphs.AbstractLog;
 import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
 import org.eclipse.jetty.util.BlockingArrayQueue;
 import org.mongodb.morphia.Datastore;
@@ -30,7 +31,7 @@ public class AnalyticsStore {
     /**
      * Add the entry to be logged
      */
-    public void submit(RequestLogAnalytics entry) {
+    public void submit(AbstractLog entry) {
         pool.execute(new SaveLog(entry, datastore, logger));
     }
 
@@ -44,12 +45,12 @@ public class AnalyticsStore {
     }
 
     private static class SaveLog implements Runnable {
-        private final RequestLogAnalytics entry;
+        private final AbstractLog entry;
         private final Logger logger;
         private final Datastore datastore;
 
 
-        private SaveLog(RequestLogAnalytics entry, Datastore datastore, Logger logger) {
+        private SaveLog(AbstractLog entry, Datastore datastore, Logger logger) {
             this.entry = entry;
             this.datastore = datastore;
             this.logger = logger;

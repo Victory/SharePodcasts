@@ -1,8 +1,7 @@
 package org.dfhu.sharepodcasts.approutes;
 
-import com.google.gson.Gson;
 import org.dfhu.sharepodcasts.RouteManager;
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
+import org.dfhu.sharepodcasts.morphs.ClientSideErrorMorph;
 import org.dfhu.sharepodcasts.routeing.BytesRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
@@ -12,7 +11,9 @@ import spark.Response;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AnalyticsRoute extends BytesRoute implements Route {
+import static org.dfhu.sharepodcasts.routeing.Route.METHOD.GET;
+
+public class JsErrorRoute extends BytesRoute implements Route {
 
     private static final String oneByOne64 =
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
@@ -21,18 +22,18 @@ public class AnalyticsRoute extends BytesRoute implements Route {
 
     private final AnalyticsStore analyticsStore;
 
-    public AnalyticsRoute(AnalyticsStore analyticsStore) {
+    public JsErrorRoute(AnalyticsStore analyticsStore) {
         this.analyticsStore = analyticsStore;
     }
 
     @Override
     public String getPath() {
-        return RouteManager.analyticsPixel();
+        return RouteManager.jsErrorPixel();
     }
 
     @Override
-    public METHOD getMethod() {
-        return METHOD.GET;
+    public Route.METHOD getMethod() {
+        return GET;
     }
 
     @Override
@@ -44,10 +45,11 @@ public class AnalyticsRoute extends BytesRoute implements Route {
         res.header("Expires", "0");
 
         String pathname = req.queryParams("pathname");
+        String msg = req.queryParams("msg");
 
-        RequestLogAnalytics log = new RequestLogAnalytics();
+        ClientSideErrorMorph log = new ClientSideErrorMorph();
         log.populateCommon(req, pathname);
-
+        log.errorMessage = msg;
         analyticsStore.submit(log);
 
         return img;

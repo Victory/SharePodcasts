@@ -61,4 +61,8 @@ public class RouteManager {
     public static String browseEpisodes() {
         return "/browse/show/:id";
     }
+
+    public static String jsErrorPixel() {
+        return "/jserror";
+    }
 }
