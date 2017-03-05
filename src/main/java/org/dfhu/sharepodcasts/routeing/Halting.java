@@ -5,6 +5,9 @@ import org.dfhu.sharepodcasts.service.AnalyticsStore;
 import org.dfhu.sharepodcasts.viewmodels.ViewModelUtil;
 import org.dfhu.sharepodcasts.views.errors.NotFound;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import static spark.Spark.exception;
 import static spark.Spark.halt;
 
@@ -23,11 +26,17 @@ public class Halting {
     }
 
     public static void bindInternalServerError(final AnalyticsStore analyticsStore) {
-        exception(Exception.class, (exception, req, res) -> {
+        exception(Exception.class, (exc, req, res) -> {
             ServerSideErrorMorph log = new ServerSideErrorMorph();
             log.populateCommon(req, req.pathInfo());
-            log.errorClass = exception.getClass().getName();
-            log.errorMessage = exception.getMessage();
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            exc.printStackTrace(pw);
+            log.stackTrace = sw.toString();
+
+            log.errorClass = exc.getClass().getName();
+            log.errorMessage = exc.getMessage();
 
             analyticsStore.submit(log);
 

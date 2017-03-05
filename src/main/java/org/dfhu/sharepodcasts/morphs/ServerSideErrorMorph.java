@@ -6,4 +6,5 @@ import org.mongodb.morphia.annotations.Entity;
 public class ServerSideErrorMorph extends AbstractLog {
     public String errorMessage;
     public String errorClass;
+    public String stackTrace;
 }
