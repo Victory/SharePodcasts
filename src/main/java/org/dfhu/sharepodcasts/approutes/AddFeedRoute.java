@@ -32,7 +32,7 @@ public class AddFeedRoute extends JsonRoute implements Route {
     }
 
     @Override
-    public JsonResponse getGsonable(Request req, Response res) {
+    public JsonResponse getJsonResponse(Request req, Response res) {
         String url = req.queryParams("url");
         boolean success = false;
         String msg;

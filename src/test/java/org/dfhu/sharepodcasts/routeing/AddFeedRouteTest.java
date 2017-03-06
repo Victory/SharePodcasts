@@ -28,7 +28,7 @@ public class AddFeedRouteTest {
         when(req.ip()).thenReturn(ip);
         when(req.queryParams("url")).thenReturn(url);
 
-        addFeedRoute.getGsonable(req, null);
+        addFeedRoute.getJsonResponse(req, null);
         verify(feedStore, times(1)).submit(url, ip);
     }
 

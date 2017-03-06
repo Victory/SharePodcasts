@@ -23,7 +23,7 @@ public class EpisodeSuggestRouteTest {
 
         EpisodeSuggestRoute episodeSuggestRoute =
                 new EpisodeSuggestRoute(episodeSuggestions);
-        episodeSuggestRoute.getGsonable(req, null);
+        episodeSuggestRoute.getJsonResponse(req, null);
 
         verify(episodeSuggestions, times(1)).suggest(expected);
     }

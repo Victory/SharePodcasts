@@ -65,4 +65,12 @@ public class RouteManager {
     public static String jsErrorPixel() {
         return "/jserror";
     }
+
+    public static String contactForm() {
+        return "/contact";
+    }
+
+    public static String contactFormSave() {
+        return "/contact/save";
+    }
 }

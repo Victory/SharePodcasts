@@ -2,7 +2,17 @@ import {buildPlayer} from "./listen";
 import {bindButtonUiActions} from "./buttons";
 import {importFeed} from "./feed";
 import {suggestKeyup} from "./suggest";
+import {bindContactForm} from "./contact";
+
 let $bodyBox = $("#bodyBox");
+
+function rebindAll() {
+    buildPlayer();
+    bindButtonUiActions();
+    importFeed();
+    suggestKeyup();
+    bindContactForm();
+}
 
 /**
  * Load ajax version of page into $bodyBox
@@ -12,10 +22,7 @@ let $bodyBox = $("#bodyBox");
 function ajaxLoadBodyBox(href, shouldPush) {
     $.get(href + "?ajax=1", (data) => {
         $bodyBox.html(data);
-        buildPlayer();
-        bindButtonUiActions();
-        importFeed();
-        suggestKeyup();
+        rebindAll();
 
         $("title").html(window.vic.title);
         window.scrollTo(0, 0);

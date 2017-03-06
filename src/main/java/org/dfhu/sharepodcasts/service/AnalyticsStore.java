@@ -1,12 +1,10 @@
 package org.dfhu.sharepodcasts.service;
 
 import org.dfhu.sharepodcasts.morphs.AbstractLog;
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
 import org.eclipse.jetty.util.BlockingArrayQueue;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.Logger;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 

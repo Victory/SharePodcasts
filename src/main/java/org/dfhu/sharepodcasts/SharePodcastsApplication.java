@@ -32,17 +32,18 @@ public class SharePodcastsApplication {
         Halting.bindInternalServerError(analyticsStore);
 
         // Setup all the routes
+        addRoute(new ContactFormRoute());
+        addRoute(new ContactFormSaveRoute(analyticsStore));
+
         addRoute(new AddFeedFormRoute());
-        addRoute(new HomeRoute());
         addRoute(new AnalyticsRoute(analyticsStore));
         addRoute(new BrowseHomeRoute(showQuery));
         addRoute(new BrowseLetterRoute(showQuery));
         addRoute(new BrowseEpisodesRoute(episodeQuery));
-
         addRoute(new CreateShareLinkRoute(showQuery, episodeQuery));
         addRoute(new AddFeedRoute(feedStore, LoggerFactory.getLogger(AddFeedRoute.class)));
+        addRoute(new HomeRoute());
         addRoute(new PrivacyPolicyRoute());
-
         addRoute(new JsErrorRoute(analyticsStore));
         addRoute(new ListenRoute(showQuery, episodeQuery, shareQuery));
 

@@ -8,12 +8,12 @@ import spark.Spark;
 public abstract class JsonRoute extends RouteAdder<JsonRoute> implements Route{
 
     /** Get an object that you can Gson.toJson() */
-    public abstract JsonResponse getGsonable(Request req, Response res);
+    public abstract JsonResponse getJsonResponse(Request req, Response res);
 
     @Override
     public void doPost(RouteAdder<JsonRoute> routeAdder) {
         Spark.post(getPath(),
-                (req, res) -> new Gson().toJson(getGsonable(req, res)));
+                (req, res) -> new Gson().toJson(getJsonResponse(req, res)));
 
     }
 }

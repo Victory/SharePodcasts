@@ -5,12 +5,16 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 import spark.Request;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public abstract class AbstractLog {
     @Id
     public ObjectId id;
     public String ip;
     public String userAgent;
-    public String headers;
+    public Map<String, String> headers;
     public long timeStamp;
     public String pathname;
 
@@ -23,7 +27,14 @@ public abstract class AbstractLog {
         this.ip = req.ip();
         this.timeStamp = System.currentTimeMillis();
         this.userAgent = req.userAgent();
-        this.headers = new Gson().toJson(req.headers());
+
+        Set<String> headers = req.headers();
+        Map<String, String> headerMap = new HashMap<>(headers.size());
+        for (String header: headers) {
+            headerMap.put(header, req.headers(header));
+        }
+
+        this.headers = headerMap;
         this.pathname = pathname;
     }
 }

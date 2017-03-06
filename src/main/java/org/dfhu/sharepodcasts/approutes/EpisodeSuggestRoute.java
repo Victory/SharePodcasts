@@ -29,7 +29,7 @@ public class EpisodeSuggestRoute extends JsonRoute implements Route {
     }
 
     @Override
-    public JsonResponse getGsonable(Request req, Response res) {
+    public JsonResponse getJsonResponse(Request req, Response res) {
         String keyword = req.queryParams("q");
         List<EpisodeSuggestions.SuggestResponse> suggestions
                 = episodeSuggestions.suggest(keyword);

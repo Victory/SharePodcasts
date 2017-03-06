@@ -1,0 +1,23 @@
+@import org.dfhu.sharepodcasts.views.layout.FullPage
+@import org.dfhu.sharepodcasts.viewmodels.*
+
+@args (ContactFormViewModel vm)
+
+@FullPage.template("Contact", vm) -> {
+<div class="container">
+    <div class="row hidden" vic-contact-success>
+        <div class="col-xs-12">
+            <div class="well">
+                <h3>Thanks! Your Message Has Been Sent</h3>
+                <p>If you provided your email, we will try to get back to use ASAP</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            @ContactForm.template()
+        </div>
+    </div>
+</div>
+}

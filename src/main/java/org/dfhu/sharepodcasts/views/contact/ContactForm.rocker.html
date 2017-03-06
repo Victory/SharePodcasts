@@ -1,0 +1,57 @@
+@args ()
+
+<form vic-contact-form action="@attr(route().contactFormSave())" method="POST" class="well-form">
+    <div class="inputs form-title well">
+        <h2>Contact
+        </h2>
+
+        <div class="form-group label-floating">
+            <label for="your-name" class="control-label">
+                Your Name
+                <small>(Required)</small>
+            </label>
+            <input required
+                   vic-btn
+                   vic-btn-disables="contact-form-btn-box"
+                   vic-btn-loads="contact-form-btn-box"
+                   class="form-control"
+                   id="your-name"
+                   type="text"
+                   name="name">
+        </div>
+
+
+        <div class="form-group label-floating">
+            <label for="your-email" class="control-label">
+                Email <small>(optional)</small>
+            </label>
+            <input class="form-control" id="your-email" type="email">
+            <span class="help-block">We don't share your email with anyone.</span>
+        </div>
+
+        <div class="form-group label-floating is-empty">
+            <label for="msg" class="control-label">
+                Your comment
+                <small>(Required).</small>
+            </label>
+            <textarea required
+                      id="msg"
+                      maxlength="1500"
+                      class="form-control"
+                      autocomplete="off"
+                      name="msg"></textarea>
+
+            <span class="help-block">Must be at least 10 letters long</span>
+        </div>
+
+        <div class="form-group text-right" id="contact-form-btn-box">
+            <button type="submit" class="btn btn-primary btn-raised">
+                <span>
+                    Send
+                </span>
+            </button>
+            <img src="/img/loading.gif" class="loading-gif hidden" />
+        </div>
+    </div>
+</form>
+
