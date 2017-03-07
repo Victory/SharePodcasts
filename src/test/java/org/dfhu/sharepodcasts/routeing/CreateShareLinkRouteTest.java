@@ -1,7 +1,6 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import com.fizzed.rocker.RockerModel;
-import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.VicSession;
 import org.dfhu.sharepodcasts.approutes.CreateShareLinkRoute;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
@@ -9,13 +8,8 @@ import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.junit.Test;
-import org.dfhu.sharepodcasts.approutes.AnalyticsRoute;
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
-import org.dfhu.sharepodcasts.service.AnalyticsStore;
-import org.mockito.ArgumentCaptor;
 import spark.HaltException;
 import spark.Request;
-import spark.Response;
 
 import java.util.Optional;
 
@@ -24,7 +18,6 @@ import static org.dfhu.sharepodcasts.testutil.BaseMorphs.getEpisodeMorph1;
 import static org.dfhu.sharepodcasts.testutil.BaseMorphs.getShowMorph1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.when;

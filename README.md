@@ -37,6 +37,19 @@ Tests are in `src/main/test` and can be run with gradle
 Javascript is compiled with webpack.
 
     ./gradlew -t compileWebpack
+    
+### nginx config
+
+Normally this application would be run behind a proxy. 
+For Nginx, you will have to foward the users real ip.
+
+    proxy_set_header X-Real-IP       $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    
+    location / {
+        proxy_pass http://127.0.0.1:4567;
+    }
+
 
 #### Todos
 
@@ -49,9 +62,7 @@ In no particular order
  - Web Analytics frontend
  - Top lists
  - Add collection for seeing how often people add already existing shows
- - Contact form
  - More informative 404 pages
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
  - Add share links (quick and customized) on Listen page
- - Move "add feed" box to its own page, have it redirect to the feed added browse page

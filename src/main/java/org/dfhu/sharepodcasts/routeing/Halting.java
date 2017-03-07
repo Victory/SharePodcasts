@@ -2,6 +2,7 @@ package org.dfhu.sharepodcasts.routeing;
 
 import org.dfhu.sharepodcasts.morphs.ServerSideErrorMorph;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
+import org.dfhu.sharepodcasts.util.StandardRequestLog;
 import org.dfhu.sharepodcasts.viewmodels.ViewModelUtil;
 import org.dfhu.sharepodcasts.views.errors.NotFound;
 
@@ -27,8 +28,12 @@ public class Halting {
 
     public static void bindInternalServerError(final AnalyticsStore analyticsStore) {
         exception(Exception.class, (exc, req, res) -> {
-            ServerSideErrorMorph log = new ServerSideErrorMorph();
-            log.populateCommon(req, req.pathInfo());
+
+
+            ServerSideErrorMorph log = StandardRequestLog.build(
+                    ServerSideErrorMorph.class,
+                    req,
+                    req.pathInfo());
 
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);

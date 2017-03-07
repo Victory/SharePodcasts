@@ -5,6 +5,7 @@ import org.dfhu.sharepodcasts.morphs.ClientSideErrorMorph;
 import org.dfhu.sharepodcasts.routeing.BytesRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
+import org.dfhu.sharepodcasts.util.StandardRequestLog;
 import spark.Request;
 import spark.Response;
 
@@ -47,8 +48,10 @@ public class JsErrorRoute extends BytesRoute implements Route {
         String pathname = req.queryParams("pathname");
         String msg = req.queryParams("msg");
 
-        ClientSideErrorMorph log = new ClientSideErrorMorph();
-        log.populateCommon(req, pathname);
+        ClientSideErrorMorph log = StandardRequestLog.build(
+                ClientSideErrorMorph.class,
+                req,
+                pathname);
         log.errorMessage = msg;
         analyticsStore.submit(log);
 

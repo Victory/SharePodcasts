@@ -1,7 +1,7 @@
 package org.dfhu.sharepodcasts.routeing;
 
 import org.dfhu.sharepodcasts.approutes.AnalyticsRoute;
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
+import org.dfhu.sharepodcasts.morphs.RequestLogMorph;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -31,8 +31,8 @@ public class AnalyticsRouteTest {
         AnalyticsRoute analyticsRoute = new AnalyticsRoute(analyticsStore);
         analyticsRoute.getBytes(request, response);
 
-        ArgumentCaptor<RequestLogAnalytics> captor =
-                ArgumentCaptor.forClass(RequestLogAnalytics.class);
+        ArgumentCaptor<RequestLogMorph> captor =
+                ArgumentCaptor.forClass(RequestLogMorph.class);
         verify(analyticsStore, times(1)).submit(captor.capture());
 
         String actual = captor.getValue().ip;
@@ -68,8 +68,8 @@ public class AnalyticsRouteTest {
 
         verify(request, times(1)).queryParams("pathname");
 
-        ArgumentCaptor<RequestLogAnalytics> captor =
-                ArgumentCaptor.forClass(RequestLogAnalytics.class);
+        ArgumentCaptor<RequestLogMorph> captor =
+                ArgumentCaptor.forClass(RequestLogMorph.class);
 
         verify(analyticsStore, times(1)).submit(captor.capture());
         assertEquals(expected, captor.getValue().pathname);

@@ -1,6 +1,6 @@
 package org.dfhu.sharepodcasts.service;
 
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
+import org.dfhu.sharepodcasts.morphs.RequestLogMorph;
 import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class AnalyticsStoreTest {
 
         Logger logger = mock(Logger.class);
         Datastore datastore = mock(Datastore.class);
-        RequestLogAnalytics entity = new RequestLogAnalytics();
+        RequestLogMorph entity = new RequestLogMorph();
         entity.ip = "1.2.3.4";
 
         AnalyticsStore analyticsStore = new AnalyticsStore(datastore, logger);
@@ -33,7 +33,7 @@ public class AnalyticsStoreTest {
     public void datastoreExceptionLogs() throws InterruptedException {
 
         Logger logger = mock(Logger.class);
-        RequestLogAnalytics entity = new RequestLogAnalytics();
+        RequestLogMorph entity = new RequestLogMorph();
         entity.ip = "1.2.3.4";
 
         Datastore datastore = mock(Datastore.class);

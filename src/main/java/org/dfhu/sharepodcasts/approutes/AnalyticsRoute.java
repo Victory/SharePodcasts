@@ -1,11 +1,11 @@
 package org.dfhu.sharepodcasts.approutes;
 
-import com.google.gson.Gson;
 import org.dfhu.sharepodcasts.RouteManager;
-import org.dfhu.sharepodcasts.morphs.RequestLogAnalytics;
+import org.dfhu.sharepodcasts.morphs.RequestLogMorph;
 import org.dfhu.sharepodcasts.routeing.BytesRoute;
 import org.dfhu.sharepodcasts.routeing.Route;
 import org.dfhu.sharepodcasts.service.AnalyticsStore;
+import org.dfhu.sharepodcasts.util.StandardRequestLog;
 import spark.Request;
 import spark.Response;
 
@@ -45,9 +45,10 @@ public class AnalyticsRoute extends BytesRoute implements Route {
 
         String pathname = req.queryParams("pathname");
 
-        RequestLogAnalytics log = new RequestLogAnalytics();
-        log.populateCommon(req, pathname);
-
+        RequestLogMorph log = StandardRequestLog.build(
+                RequestLogMorph.class,
+                req,
+                pathname);
         analyticsStore.submit(log);
 
         return img;
