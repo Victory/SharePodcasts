@@ -7,7 +7,7 @@
 <div class="well well-margin-top">
     <div class="row">
         <div class="col-xs-12">
-            <p>
+            <p vic-time-jumps>
                 @raw(vm.getShareComment())
             </p>
         </div>
@@ -18,7 +18,6 @@
 <div class="well well-margin-top">
     <div class="row">
         <div class="col-xs-12">
-
             <h2>@vm.getEpisode().title
                 <small>@vm.getEpisode().showTitle</small>
 
@@ -27,7 +26,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-9">
+        <div class="col-xs-12">
             <div vic-audio-box></div>
             <a target="_blank" href="@attr(vm.getEpisode().url)">
                 <div id="audio-error" class="alert alert-info hidden">
@@ -36,21 +35,14 @@
                     </h3>
                 </div>
             </a>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <a href="@attr(vm.getEpisode().url)" class="btn btn-sup btn-material-pink btn-raised" style="width:100%">
-                <i class="material-icons">file_download</i>
-                <span>DOWNLOAD AND PLAY</span>
-                <div class="ripple-container"></div>
-            </a>
+            @SocialButtons.template(vm)
 
-            @SocialButtons.template()
         </div>
 
 
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-9">
+        <div class="col-xs-12">
             @vm.cleanDescription()
         </div>
     </div>
@@ -80,5 +72,36 @@
         </div>
     </div>
 
+</div>
+
+
+
+<div class="well well-margin-top">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <form action="@attr(route().createShareLink())" method="POST">
+                <input type="hidden" name="rowId" value="@attr(vm.getEpisode().id.toString())"/>
+                <button type="submit" class="btn btn-sup btn-raised">
+                    <i class="material-icons">&#xE8CD;</i>
+                    <span>Comment and Share Episode</span>
+                    <div class="ripple-container"></div>
+                </button>
+
+
+                <a href="@attr(route().browse())" class="btn btn-sup btn-raised">
+                    <i class="material-icons">&#xE85D;</i>
+                    <span>Browse for More Episodes</span>
+                    <div class="ripple-container"></div>
+                </a>
+
+                <a href="/" class="btn btn-sup btn-raised">
+                    <i class="material-icons">&#xE8B6;</i>
+                    <span>Search for More Episodes</span>
+                    <div class="ripple-container"></div>
+                </a>
+
+            </form>
+        </div>
+    </div>
 </div>
 

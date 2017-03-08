@@ -21,13 +21,43 @@ function bindShare() {
         $this.attr('href', link);
     });
 
-    $("#thislink").val(thisPageFullUrl());
-    $("#thislink").on("focus", evt => {
-        let target = evt.target;
-        target.setSelectionRange(0, target.value.length);
-    });
+    var $thisLink = $("#thislink");
+    if ($thisLink.length > 0) {
+        $thisLink.val(thisPageFullUrl());
+        $thisLink.attr("size", $thisLink.val().length);
+        $thisLink.css("font-family", "monospace");
+        $thisLink.css("font-size", ".7em");
+        $thisLink.on("focus", evt => {
+            let target = evt.target;
+            target.setSelectionRange(0, target.value.length);
+        });
+    }
 }
 
+/** PoC for turning 10:30 style time stamps to jumps to that timestamp in the audio */
+function bindTimeJumps() {
+    let $box = $("[vic-time-jumps]");
+    if ($box.length < 1) {
+        return;
+    }
+
+    let text = $box.text();
+
+    let regex = /\s([0-9]+:[0-9]+)\s/gim;
+    let replaced = text.replace(regex, ' <a href="#$1" class="timejump">$1</a> ');
+    $box.html(replaced);
+    $box.find(".timejump").click(evt => {
+        evt.preventDefault();
+        let $this = $(evt.target);
+        let tic = $this.attr('href');
+        let bits = tic.substr(1, 100).split(':');
+        let time = parseInt(bits[0])*60 + parseInt(bits[1]);
+
+        let audio = document.getElementsByTagName('audio')[0];
+        audio.currentTime = time;
+        audio.play();
+    });
+}
 
 module.exports = {
     buildPlayer: () => {
@@ -51,5 +81,6 @@ module.exports = {
         });
 
         setTimeout(bindShare, 1);
+        setTimeout(bindTimeJumps, 2);
     }
 };
