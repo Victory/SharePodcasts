@@ -66,3 +66,4 @@ In no particular order
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
  - Add share links (quick and customized) on Listen page
+ - Upcase letters in titles for browse by title

@@ -88,9 +88,15 @@
                 </button>
 
 
-                <a href="@attr(route().browse())" class="btn btn-sup btn-raised">
+                <a href="/browse/show/@vm.getShow().id.toString()" class="btn btn-sup btn-raised">
                     <i class="material-icons">&#xE85D;</i>
-                    <span>Browse for More Episodes</span>
+                    <span>Browse This Show</span>
+                    <div class="ripple-container"></div>
+                </a>
+
+                <a href="/browse" class="btn btn-sup btn-raised">
+                    <i class="material-icons">&#xE85D;</i>
+                    <span>Browse All Shows</span>
                     <div class="ripple-container"></div>
                 </a>
 
