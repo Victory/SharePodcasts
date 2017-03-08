@@ -144,3 +144,28 @@ button.btn.btn-raised.btn-primary:disabled
     margin: 0;
     list-style: none;
 }
+
+a.social-share-button {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    width: 32px;
+    height: 25px;
+    display: inline-block;
+}
+
+a.social-share-button[vic-network="twitter"] {
+    background-color: rgb(85, 172, 238)
+}
+
+a.social-share-button[vic-network="reddit"] {
+    background-color: rgb(255, 69, 0);
+}
+
+a.social-share-button[vic-network="facebook"] {
+    background-color: rgb(59, 89, 152);
+}
+
+a.social-share-button[vic-network="sms"] {
+    background-color: rgb(255, 189, 0);
+}

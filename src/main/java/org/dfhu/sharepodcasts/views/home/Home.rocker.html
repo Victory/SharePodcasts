@@ -7,6 +7,20 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
+            <div class="well">
+                <h2>Podcasts.win</h2>
+                <p>
+                    This site will help you create links to individual episodes of
+                    podcasts to share with friends. You can use the form below to
+                    search or you can <a href="@attr(route().browse())" vic-body-box>browse shows</a>.
+                    If you don't find the show you are looking for you can
+                    <a href="@attr(route().addFeedForm())" vic-body-box>add a new rss feed</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             @EpisodeSearchForm.template()
         </div>
     </div>

@@ -3,7 +3,7 @@
 
 @args(ListenViewModel vm)
 
-@FullPage.template("Listen to Podcast", vm) -> {
+@FullPage.template("Listen to " + vm.getEpisode().title + " on Podcasts.win", vm) -> {
 <div class="container">
     <div class="row">
         <div class="col-xs-12">

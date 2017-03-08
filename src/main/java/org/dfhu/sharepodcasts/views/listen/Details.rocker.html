@@ -18,8 +18,10 @@
 <div class="well well-margin-top">
     <div class="row">
         <div class="col-xs-12">
+
             <h2>@vm.getEpisode().title
                 <small>@vm.getEpisode().showTitle</small>
+
             </h2>
         </div>
     </div>
@@ -36,12 +38,16 @@
             </a>
         </div>
         <div class="col-xs-12 col-md-3">
-            <a href="@attr(vm.getEpisode().url)" class="btn btn-sup btn-material-pink btn-raised">
+            <a href="@attr(vm.getEpisode().url)" class="btn btn-sup btn-material-pink btn-raised" style="width:100%">
                 <i class="material-icons">file_download</i>
                 <span>DOWNLOAD AND PLAY</span>
                 <div class="ripple-container"></div>
             </a>
+
+            @SocialButtons.template()
         </div>
+
+
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-9">
@@ -73,5 +79,6 @@
             }
         </div>
     </div>
+
 </div>
 

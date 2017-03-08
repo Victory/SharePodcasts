@@ -19,12 +19,22 @@ function rebindAll() {
  * @param {String} href - href to load from
  * @param {Boolean} shouldPush - if we should push the href onto window.history
  */
+var xhr;
 function ajaxLoadBodyBox(href, shouldPush) {
-    $.get(href + "?ajax=1", (data) => {
+
+    if (typeof xhr != "undefined") {
+        xhr.abort();
+    } else {
+        $bodyBox.prepend("<p style='width:100%;text-align: center; display:inline-block'>... loading ...</p>");
+    }
+
+    xhr = $.get(href + "?ajax=1", (data) => {
+        xhr = undefined;
+
         $bodyBox.html(data);
+        $("title").html(window.vic.title);
         rebindAll();
 
-        $("title").html(window.vic.title);
         window.scrollTo(0, 0);
 
         if (shouldPush && history.pushState) {
@@ -51,6 +61,7 @@ function linkClickAjaxLoadBodyBox(evt) {
         document.location = href;
         return;
     }
+
     ajaxLoadBodyBox(href, true);
 }
 
