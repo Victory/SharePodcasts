@@ -44,7 +44,9 @@ public class ShowQuery extends BaseQuery {
     public List<ShowLettersMorph> getShowLetters() {
         AggregationPipeline pipe = datastore.createAggregation(ShowMorph.class)
                 .project(projection("id"), projection("title"))
-                .group(grouping("_id", accumulator("$substr", Arrays.asList("$title", 0, 1))),
+                .group(grouping("_id",
+                        accumulator("$toUpper",
+                                accumulator("$substr", Arrays.asList("$title", 0, 1)))),
                         grouping("count", accumulator("$sum", 1)),
                         grouping("shows", accumulator("$push", "title")))
                 .sort(ascending("_id"));
@@ -53,7 +55,7 @@ public class ShowQuery extends BaseQuery {
     }
 
     public List<ShowMorph> getShowsByLetter(String letter) {
-        Pattern r = Pattern.compile("^" + letter + ".*");
+        Pattern r = Pattern.compile("^" + letter + ".*", Pattern.CASE_INSENSITIVE);
         return datastore.find(ShowMorph.class)
                 .filter("title", r)
                 .asList();

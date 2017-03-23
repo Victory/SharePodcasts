@@ -65,5 +65,3 @@ In no particular order
  - More informative 404 pages
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
- - Add share links (quick and customized) on Listen page
- - Upcase letters in titles for browse by title
