@@ -61,8 +61,9 @@
     window.analytics = function () {
         var img = document.getElementById("one-by-one");
         var rnd = Math.random();
-        img.src = "/onebyone?rnd=" + rnd + "&pathname=" +
-            encodeURIComponent(document.location.pathname);
+        img.src = "/onebyone?rnd=" + rnd +
+            "&pathname=" + encodeURIComponent(document.location.pathname) +
+            "&referrer=" + encodeURIComponent(document.referrer);
     }
 
     window.analytics();

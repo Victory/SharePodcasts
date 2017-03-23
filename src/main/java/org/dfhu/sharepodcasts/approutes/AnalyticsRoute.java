@@ -49,6 +49,7 @@ public class AnalyticsRoute extends BytesRoute implements Route {
                 RequestLogMorph.class,
                 req,
                 pathname);
+        log.referrer = req.queryParams("referrer");
         analyticsStore.submit(log);
 
         return img;

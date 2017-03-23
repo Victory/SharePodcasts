@@ -4,4 +4,5 @@ import org.mongodb.morphia.annotations.Entity;
 
 @Entity("requests")
 public class RequestLogMorph extends AbstractLog {
+    public String referrer;
 }
