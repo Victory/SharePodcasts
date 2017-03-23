@@ -22,7 +22,7 @@
         window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
             setTimeout(function () {
                 var msg = 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
-                    + ' Column: ' + column + ' StackTrace: ' + errorObj + "arguments";
+                    + ' Column: ' + column + ' StackTrace: ' + JSON.stringify(errorObj) + " arguments ";
 
                 var img = document.createElement("img");
                 img.src = "/jserror?msg=" + encodeURIComponent(msg)
