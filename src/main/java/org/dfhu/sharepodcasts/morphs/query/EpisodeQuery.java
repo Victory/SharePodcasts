@@ -23,6 +23,7 @@ public class EpisodeQuery extends BaseQuery {
     public List<EpisodeMorph> byShowId(String showId) {
         return datastore.createQuery(EpisodeMorph.class)
                 .filter("showId = ", toObjectId(showId))
+                .order("pubDate")
                 .asList();
     }
 

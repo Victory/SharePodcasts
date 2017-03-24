@@ -71,7 +71,6 @@ public class FeedStore {
         JsoupFeed feed = getJsoupFeed(show.url);
         final List<String> newEpisodes = new LinkedList<>();
 
-
         feed.getEpisodes().forEach(episode -> {
             episode.showId = show.id;
             episode.showTitle = show.title;
