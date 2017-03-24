@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -62,12 +61,7 @@ public class UpdateFeeds {
         List<ShowMorph> allShows = showQuery.all();
 
         // Log start of loop
-        FeedUpdateMorph feedUpdateMorph = new FeedUpdateMorph();
-        feedUpdateMorph.timeStamp = System.currentTimeMillis();
-        feedUpdateMorph.humanDate = new Date().toString();
-        feedUpdateMorph.action = LOOP_START;
-        datastore.save(feedUpdateMorph);
-
+        log(LOOP_START);
         allShows.forEach(showMorph -> {
             try {
                 Thread.sleep(1000 * 10);
@@ -78,17 +72,11 @@ public class UpdateFeeds {
             UpdateNextShow updateNextShow = new UpdateNextShow(showMorph, feedStore, datastore);
             pool.execute(updateNextShow);
         });
-
-        // Log end of loop
-        feedUpdateMorph = new FeedUpdateMorph();
-        feedUpdateMorph.timeStamp = System.currentTimeMillis();
-        feedUpdateMorph.humanDate = new Date().toString();
-        feedUpdateMorph.action = LOOP_END;
-        datastore.save(feedUpdateMorph);
+        log(LOOP_END);
     }
 
 
-    private class UpdateNextShow implements Runnable {
+    static class UpdateNextShow implements Runnable {
         private final ShowMorph show;
         private final FeedStore feedStore;
         private final Datastore datastore;
@@ -102,12 +90,6 @@ public class UpdateFeeds {
         @Override
         public void run() {
             FeedUpdateMorph feedUpdateMorph = new FeedUpdateMorph();
-            feedUpdateMorph.showTitle = show.title;
-            feedUpdateMorph.action = SHOW_START;
-            feedUpdateMorph.timeStamp = System.currentTimeMillis();
-            feedUpdateMorph.humanDate = new Date().toString();
-            datastore.save(feedUpdateMorph);
-
             try {
                 feedUpdateMorph.episodes =
                         feedStore.updateFeed(show);
@@ -121,5 +103,23 @@ public class UpdateFeeds {
                 datastore.save(feedUpdateMorph);
             }
         }
+
+        private void logShowStart() {
+            FeedUpdateMorph feedUpdateMorph = new FeedUpdateMorph();
+            feedUpdateMorph.showTitle = show.title;
+            feedUpdateMorph.action = SHOW_START;
+            feedUpdateMorph.timeStamp = System.currentTimeMillis();
+            feedUpdateMorph.humanDate = new Date().toString();
+            datastore.save(feedUpdateMorph);
+        }
     }
+
+    public void log(String action) {
+        FeedUpdateMorph feedUpdateMorph = new FeedUpdateMorph();
+        feedUpdateMorph.timeStamp = System.currentTimeMillis();
+        feedUpdateMorph.humanDate = new Date().toString();
+        feedUpdateMorph.action = action;
+        datastore.save(feedUpdateMorph);
+    }
+
 }
