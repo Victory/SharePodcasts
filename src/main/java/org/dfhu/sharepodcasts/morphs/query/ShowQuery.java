@@ -6,6 +6,7 @@ import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.util.StreamUtils;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.aggregation.AggregationPipeline;
+import org.mongodb.morphia.query.Query;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -31,6 +32,11 @@ public class ShowQuery extends BaseQuery {
                 .get();
 
         return Optional.ofNullable(show);
+    }
+
+    public List<ShowMorph> all() {
+        return datastore.find(ShowMorph.class)
+                .asList();
     }
 
     public Optional<ShowMorph> byUrl(String url) {

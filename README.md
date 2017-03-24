@@ -55,7 +55,6 @@ For Nginx, you will have to foward the users real ip.
 
 In no particular order
 
- - Build the feed updater thread pool and executor
  - Terms of Service
  - Add a field to episodes collection to search text and index on that
  - Add text explaining the site on the homepage
@@ -65,3 +64,4 @@ In no particular order
  - More informative 404 pages
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
+ - robots.txt

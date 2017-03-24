@@ -2,17 +2,20 @@ package org.dfhu.sharepodcasts.service;
 
 import com.mongodb.DuplicateKeyException;
 import org.dfhu.sharepodcasts.JsoupFeed;
+import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Key;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FeedStore {
 
@@ -26,14 +29,12 @@ public class FeedStore {
 
     /**
      * Stores the the rss feed in the Datastore. This is a blocking operation.
-     * @param url - full your of the rss feed
+     * @param showUrl - full your of the rss feed
      * @param usersIp - the ip from the Request
      * @return - title of the show added
      */
-    public ShowMorph submit(String url, String usersIp) throws IOException {
-        InputStream inputStream = new URL(url).openConnection().getInputStream();
-        Document doc = Jsoup.parse(inputStream, "UTF-8", "", Parser.xmlParser());
-        JsoupFeed feed = new JsoupFeed(url, doc);
+    public ShowMorph submit(String showUrl, String usersIp) throws IOException {
+        JsoupFeed feed = getJsoupFeed(showUrl);
 
         final ShowMorph showMorph = new ShowMorph();
         showMorph.title = feed.getTitle();
@@ -60,4 +61,44 @@ public class FeedStore {
 
         return showQuery.byUrl(showMorph.url).get();
     }
+
+    /**
+     * Update an existing feed
+     * @param show - feed to update
+     * @return
+     */
+    public List<String> updateFeed(final ShowMorph show) throws IOException {
+        JsoupFeed feed = getJsoupFeed(show.url);
+        final List<String> newEpisodes = new LinkedList<>();
+
+
+        feed.getEpisodes().forEach(episode -> {
+            episode.showId = show.id;
+            episode.showTitle = show.title;
+            try {
+                datastore.save(episode);
+                newEpisodes.add(episode.title);
+            } catch (DuplicateKeyException e) {
+                UpdateOperations<EpisodeMorph> ops =
+                        datastore.createUpdateOperations(EpisodeMorph.class)
+                                .set("url", episode.url);
+                datastore.update(episode, ops);
+            }
+        });
+
+        return newEpisodes;
+    }
+
+    /**
+     * Get the feed
+     * @param showUrl - url of the feed
+     * @return
+     * @throws IOException
+     */
+    private JsoupFeed getJsoupFeed(String showUrl) throws IOException {
+        InputStream inputStream = new URL(showUrl).openConnection().getInputStream();
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "", Parser.xmlParser());
+        return new JsoupFeed(showUrl, doc);
+    }
+
 }
