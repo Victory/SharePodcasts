@@ -2,11 +2,12 @@ package org.dfhu.sharepodcasts.routeing;
 
 import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.VicSession;
+import org.dfhu.sharepodcasts.approutes.ListenRoute;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
 import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
-import org.dfhu.sharepodcasts.approutes.ListenRoute;
+import org.dfhu.sharepodcasts.testutil.BaseMorphs;
 import org.junit.Ignore;
 import org.junit.Test;
 import spark.HaltException;
@@ -29,7 +30,7 @@ public class ListenRouteTest {
 
         VicSession vicSession = new VicSession(req, null);
         EpisodeQuery episodeQuery = mock(EpisodeQuery.class);
-        when(episodeQuery.byId(target)).thenReturn(Optional.ofNullable(null));
+        when(episodeQuery.byId(target)).thenReturn(Optional.empty());
 
         ListenRoute listenRoute = new ListenRoute(null, episodeQuery, null);
         listenRoute.getRockerModel(req, null, vicSession);
@@ -61,22 +62,14 @@ public class ListenRouteTest {
     private ListenRoute getListenRoute(String targetEpisodeUrl, String targetRowId, ObjectId showId) {
 
         EpisodeQuery episodeQuery = mock(EpisodeQuery.class);
-        EpisodeMorph episodeMorph = new EpisodeMorph();
+        EpisodeMorph episodeMorph = BaseMorphs.getEpisodeMorph1();
         episodeMorph.showId = showId;
-        episodeMorph.title = "Episode Title";
-        episodeMorph.showTitle = "The show";
         episodeMorph.url = targetEpisodeUrl;
-        episodeMorph.description = "<script>alert(1)</script><b>Good Code</b>";
         Optional<EpisodeMorph> episode = Optional.of(episodeMorph);
         when(episodeQuery.byId(targetRowId)).thenReturn(episode);
 
         ShowQuery showQuery = mock(ShowQuery.class);
-        ShowMorph showMorph = new ShowMorph();
-
-        showMorph.url = "http://example.com/feed";
-        showMorph.showUrl = "http://example.com";
-        showMorph.author = "";
-        showMorph.copyright = "";
+        ShowMorph showMorph = BaseMorphs.getShowMorph1();
 
         Optional<ShowMorph> show = Optional.of(showMorph);
         when(showQuery.byId(showId)).thenReturn(show);
