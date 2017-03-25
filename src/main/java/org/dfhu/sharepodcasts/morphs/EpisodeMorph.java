@@ -18,4 +18,6 @@ public class EpisodeMorph {
     public long pubDate;
     public String showTitle;
     public ObjectId showId;
+    @Indexed(options = @IndexOptions(unique = true, sparse = true))
+    public String uniqueId;
 }

@@ -64,6 +64,7 @@ public class JsoupFeed {
             episode.title = item.getTitle();
             episode.pubDate = item.getPubDate();
             episode.description = item.getDescription();
+            episode.uniqueId = item.getUniqueId();
             items.add(episode);
         });
 

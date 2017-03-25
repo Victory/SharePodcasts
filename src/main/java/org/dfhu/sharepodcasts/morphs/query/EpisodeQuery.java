@@ -1,8 +1,9 @@
 package org.dfhu.sharepodcasts.morphs.query;
 
-import org.bson.types.ObjectId;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,4 +35,16 @@ public class EpisodeQuery extends BaseQuery {
                 .asList();
     }
 
+    public void updateFeedUniqueId(EpisodeMorph episode) {
+        Query<EpisodeMorph> q = datastore.createQuery(EpisodeMorph.class);
+        q.or(
+                q.criteria("url").equal(episode.url),
+                q.criteria("uniqueId").equal(episode.uniqueId));
+
+        UpdateOperations<EpisodeMorph> ops =
+                datastore.createUpdateOperations(EpisodeMorph.class)
+                        .set("url", episode.url)
+                        .set("uniqueId", episode.uniqueId);
+        datastore.update(q, ops);
+    }
 }

@@ -89,7 +89,10 @@ public class UpdateFeeds {
 
         @Override
         public void run() {
+            logShowStart();
+
             FeedUpdateMorph feedUpdateMorph = new FeedUpdateMorph();
+            feedUpdateMorph.showTitle = show.title;
             try {
                 feedUpdateMorph.episodes =
                         feedStore.updateFeed(show);

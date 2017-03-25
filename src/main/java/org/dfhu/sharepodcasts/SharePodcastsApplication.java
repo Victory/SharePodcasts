@@ -21,7 +21,7 @@ public class SharePodcastsApplication {
 
         AnalyticsStore analyticsStore = new AnalyticsStore(
                 datastore, LoggerFactory.getLogger(AnalyticsStore.class));
-        FeedStore feedStore = new FeedStore(datastore, showQuery);
+        FeedStore feedStore = new FeedStore(datastore, showQuery, episodeQuery);
         EpisodeSuggestions episodeSuggestions = new EpisodeSuggestions(episodeQuery);
         ShortLinkCreator shortLinkCreator =
                 new ShortLinkCreator(shareQuery, LoggerFactory.getLogger(ShortLinkCreator.class));

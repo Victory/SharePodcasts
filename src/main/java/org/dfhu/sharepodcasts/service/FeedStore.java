@@ -4,6 +4,7 @@ import com.mongodb.DuplicateKeyException;
 import org.dfhu.sharepodcasts.JsoupFeed;
 import org.dfhu.sharepodcasts.morphs.EpisodeMorph;
 import org.dfhu.sharepodcasts.morphs.ShowMorph;
+import org.dfhu.sharepodcasts.morphs.query.EpisodeQuery;
 import org.dfhu.sharepodcasts.morphs.query.ShowQuery;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,10 +22,12 @@ public class FeedStore {
 
     private final Datastore datastore;
     private final ShowQuery showQuery;
+    private final EpisodeQuery episodeQuery;
 
-    public FeedStore(Datastore datastore, ShowQuery showQuery) {
+    public FeedStore(Datastore datastore, ShowQuery showQuery, EpisodeQuery episodeQuery) {
         this.datastore = datastore;
         this.showQuery = showQuery;
+        this.episodeQuery = episodeQuery;
     }
 
     /**
@@ -78,10 +81,7 @@ public class FeedStore {
                 datastore.save(episode);
                 newEpisodes.add(episode.title);
             } catch (DuplicateKeyException e) {
-                UpdateOperations<EpisodeMorph> ops =
-                        datastore.createUpdateOperations(EpisodeMorph.class)
-                                .set("url", episode.url);
-                datastore.update(episode, ops);
+                episodeQuery.updateFeedUniqueId(episode);
             }
         });
 

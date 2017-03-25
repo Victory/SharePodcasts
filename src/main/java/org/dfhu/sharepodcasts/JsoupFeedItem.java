@@ -75,5 +75,13 @@ class JsoupFeedItem {
 
         return description.get(0).text();
     }
+
+    public String getUniqueId() {
+        Elements elms = elm.select("guid");
+        if (elms.size() > 0 && !elms.get(0).text().isEmpty()) {
+            return elms.get(0).text();
+        }
+        return null;
+    }
 }
 
