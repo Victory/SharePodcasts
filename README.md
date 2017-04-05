@@ -65,3 +65,4 @@ In no particular order
  - Show suggestions tooltip only if disabled
  - Make an application test that starts Spark
  - robots.txt
+ - [fix search](https://github.com/Victory/SharePodcasts/issues/1)
