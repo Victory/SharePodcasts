@@ -94,7 +94,7 @@ task concatinateVendor() {
         include "*woff"
         include "*woff2"
     }
-    
+
     def cssOut = new File("src/main/resources/public/css/vendor.css")
     cssOut.write ""
     def cssFiles = [
@@ -103,12 +103,6 @@ task concatinateVendor() {
             "node_modules/bootstrap-material-design/dist/css/ripples.css",
     ]
     cssFiles.each {cssOut << new File(it).text + "\n"}
-
-
-//     new File("node_modules/bootstrap/dist/fonts").eachFile() { file ->
-//         def name = file.name
-//         def dashName = file.name.toLower()
-//     }
 }
 
 task compileWebpack(type:Exec) {
@@ -127,7 +121,7 @@ test {
         events "passed", "skipped", "failed" 
     }
     beforeTest { descriptor ->
-    	logger.lifecycle("Running test: " + descriptor)
+        logger.lifecycle("Running test: " + descriptor)
     }
     dependsOn 'cleanTest'
 }
