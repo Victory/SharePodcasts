@@ -12,12 +12,11 @@ install:
   - cd .. && pwd && ls
   - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
   - cd rocker/rocker-gradle-plugin
-  - ../../SharePodcasts/gradlew build
-  - ../../SharePodcasts/gradlew uploadArchives
+  - ../../SharePodcasts/gradlew publishToMavenLocal
+  - cd ../../SharePodcasts && pwd
 
 script:
-  - cd ../../SharePodcasts && pwd
-  - ./gradlew rockerCompile test
+  - ./gradlew test
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

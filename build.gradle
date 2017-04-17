@@ -2,7 +2,7 @@ group 'sharepodcasts'
 version '1.0.12'
 
 apply plugin: 'java'
-apply plugin: 'rocker'
+apply plugin: 'rocker-gradle-plugin'
 apply plugin: 'idea'
 apply plugin: "application"
 
@@ -12,10 +12,8 @@ mainClassName = "org.dfhu.sharepodcasts.SharePodcasts"
 
 sourceSets {
     main {
-        java {
-            srcDir('src/main')
-            srcDir(project.buildDir.toString() + '/generated/source/apt/main')
-            srcDir(project.buildDir.toString() + "/classes/main")
+        rocker {
+            srcDir('src/main/java')
         }
     }
     test {
@@ -28,12 +26,10 @@ sourceSets {
 rocker {
     // skips building templates all together
     skip false
-    // Directory that has your Template.rocker.html files
-    templateDirectory = file('src/main/java/')
     // Directory where java files are created
-    outputDirectory = file(project.buildDir.toString() + "/generated/source/apt/main")
+    outputBaseDirectory = buildDir.toString() + "/generated/source/apt"
     // Directory where the java classes are generated and stores rocker-compiler.conf (used by RockerRuntime.getInstance().setReloading(true))
-    classDirectory = file(project.buildDir.toString() + "/classes/main")
+    classBaseDirectory = buildDir.toString() + "/classes"
 
     failOnError true
     skipTouch true
@@ -55,16 +51,14 @@ repositories {
 
 buildscript {
     repositories {
-        maven {
-            url uri('../repo') // has to contain the rocker gradle plugin
-        }
+        mavenLocal()
         jcenter() // Needed for plugin's dependencies
     }
 
     dependencies {
-        classpath group: 'com.fizzed.rocker',
-                name: 'rockergradleplugin',
-                version: '1.0-SNAPSHOT'
+        classpath group: 'com.fizzed',
+                name: 'rocker-gradle-plugin',
+                version: '1.0.0-SNAPSHOT'
 
     }
 }
