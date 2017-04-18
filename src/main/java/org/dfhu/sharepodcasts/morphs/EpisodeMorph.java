@@ -6,7 +6,11 @@ import org.mongodb.morphia.utils.IndexType;
 
 @Entity("episodes")
 @Indexes({
-        @Index(fields = @Field(value = "$**", type = IndexType.TEXT)),
+        @Index(fields = {
+            @Field(value = "title", type = IndexType.TEXT),
+            @Field(value = "showTitle", type = IndexType.TEXT)
+
+        }),
 })
 public class EpisodeMorph {
     @Id

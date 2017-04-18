@@ -66,3 +66,5 @@ In no particular order
  - Make an application test that starts Spark
  - robots.txt
  - [fix search](https://github.com/Victory/SharePodcasts/issues/1)
+ - db.episodes.dropIndex("$**_text")
+
