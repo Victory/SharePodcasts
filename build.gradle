@@ -1,14 +1,14 @@
 group 'sharepodcasts'
 version '1.0.12'
 
+
 apply plugin: 'java'
-apply plugin: 'rocker-gradle-plugin'
+apply plugin: "com.fizzed.rocker"
 apply plugin: 'idea'
 apply plugin: "application"
 
 sourceCompatibility = 1.8
 mainClassName = "org.dfhu.sharepodcasts.SharePodcasts"
-
 
 sourceSets {
     main {
@@ -53,13 +53,13 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter() // Needed for plugin's dependencies
+        maven {
+      	    url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
-        classpath group: 'com.fizzed',
-                name: 'rocker-gradle-plugin',
-                version: '1.0.0-SNAPSHOT'
-
+        classpath "gradle.plugin.com.fizzed:rocker-gradle-plugin:0.19.0"
     }
 }
 

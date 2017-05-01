@@ -8,13 +8,6 @@ before_install:
   - npm --version
   - npm upgrade
 
-install:
-  - cd .. && pwd && ls
-  - git clone -b rocker-gradle-plugin https://github.com/Victory/rocker.git
-  - cd rocker/rocker-gradle-plugin
-  - ../../SharePodcasts/gradlew publishToMavenLocal
-  - cd ../../SharePodcasts && pwd
-
 script:
   - ./gradlew test
 
